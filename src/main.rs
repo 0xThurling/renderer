@@ -1,14 +1,24 @@
+use std::ffi::c_void;
+use std::ptr::null;
+use std::sync::Mutex;
 use std::sync::atomic::AtomicBool;
 use std::sync::atomic::Ordering;
 
 mod constants;
 use constants::*;
 
+use sdl2_sys::SDL_CreateTexture;
+use sdl2_sys::SDL_DestroyRenderer;
+use sdl2_sys::SDL_DestroyWindow;
 use sdl2_sys::SDL_Event;
 use sdl2_sys::SDL_PollEvent;
+use sdl2_sys::SDL_Quit;
 use sdl2_sys::SDL_RenderClear;
+use sdl2_sys::SDL_RenderCopy;
 use sdl2_sys::SDL_RenderPresent;
 use sdl2_sys::SDL_SetRenderDrawColor;
+use sdl2_sys::SDL_Texture;
+use sdl2_sys::SDL_UpdateTexture;
 use sdl2_sys::{
     SDL_CreateRenderer, SDL_CreateWindow, SDL_GetError, SDL_INIT_EVERYTHING, SDL_Renderer,
     SDL_WINDOWPOS_CENTERED_MASK, SDL_Window,
@@ -16,11 +26,16 @@ use sdl2_sys::{
 
 extern crate sdl2_sys;
 
+static WINDOW_WIDTH: i32 = 800;
+static WINDOW_HEIGHT: i32 = 600;
+
 // unsafe code global variables
 static mut SDL_WINDOW: *mut SDL_Window = std::ptr::null_mut();
 static mut SDL_RENDERER: *mut SDL_Renderer = std::ptr::null_mut();
+static mut SDL_TEXTURE: *mut SDL_Texture = std::ptr::null_mut();
 
 static IS_RUNNING: AtomicBool = AtomicBool::new(false);
+static COLOR_BUFFER: Mutex<Option<Vec<u32>>> = Mutex::new(None);
 
 fn initialise_window() -> bool {
     unsafe {
@@ -38,11 +53,11 @@ fn initialise_window() -> bool {
             std::ptr::null(),
             SDL_WINDOWPOS_CENTERED_MASK as i32,
             SDL_WINDOWPOS_CENTERED_MASK as i32,
-            800,
-            600,
+            WINDOW_WIDTH,
+            WINDOW_HEIGHT,
             SDL_WINDOW_BORDERLESS, // SDL_WINDOW_BORDERLESS:
-                        // Needs to be specified like this since I don't have
-                        // access to all constants
+                                   // Needs to be specified like this since I don't have
+                                   // access to all constants
         );
 
         // Checks if the window was initialised
@@ -65,7 +80,25 @@ fn initialise_window() -> bool {
     true
 }
 
-fn setup() {}
+fn setup() {
+    // Allocate the memory needed for the COLOR_BUFFER
+    let mut buffer_option = COLOR_BUFFER
+        .lock()
+        .expect("Failed to get the lock of the COLOR_BUFFER");
+
+    *buffer_option = Some(vec![0; (WINDOW_WIDTH * WINDOW_HEIGHT) as usize]);
+
+    unsafe {
+        // Creating the SDL texture that is used to display the color
+        SDL_TEXTURE = SDL_CreateTexture(
+            SDL_RENDERER,
+            SDL_PIXELFORMAT_ARGB8888,
+            SDL_TEXTUREACCESS_STREAMING,
+            WINDOW_WIDTH,
+            WINDOW_HEIGHT,
+        );
+    }
+}
 
 fn process_input() {
     unsafe {
@@ -86,6 +119,40 @@ fn process_input() {
     }
 }
 
+fn clear_color_buffer(color: u32) {
+    let mut buffer_option = COLOR_BUFFER
+        .lock()
+        .expect("Failed to acquire lock for the COLOR_BUFFER");
+
+    if let Some(buffer) = buffer_option.as_mut() {
+        for y in 0..WINDOW_HEIGHT {
+            for x in 0..WINDOW_WIDTH {
+                // Gets the cell (pixel) on the screen by row + col
+                buffer[((WINDOW_WIDTH * y) + x) as usize] = color;
+            }
+        }
+    }
+}
+
+fn render_color_buffer() {
+    let mut buffer_option = COLOR_BUFFER
+        .lock()
+        .expect("Failed to acquire lock for the COLOR_BUFFER");
+
+    if let Some(buffer) = buffer_option.as_mut() {
+        unsafe {
+            SDL_UpdateTexture(
+                SDL_TEXTURE,
+                null(),
+                buffer.as_ptr() as *const c_void,
+                ((WINDOW_WIDTH as usize) * size_of::<u32>()) as i32,
+            );
+
+            SDL_RenderCopy(SDL_RENDERER, SDL_TEXTURE, null(), null());
+        }
+    }
+}
+
 fn update() {}
 
 fn render() {
@@ -93,8 +160,25 @@ fn render() {
         SDL_SetRenderDrawColor(SDL_RENDERER, 255, 0, 0, 255);
         SDL_RenderClear(SDL_RENDERER);
 
+        render_color_buffer();
+
+        clear_color_buffer(0xFFFFFF00);
+
         // ...
         SDL_RenderPresent(SDL_RENDERER);
+    }
+}
+
+fn shutdown() {
+    unsafe {
+        // Clear the memory in the COLOR_BUFFER
+        let mut buffer_option = COLOR_BUFFER.lock().unwrap();
+        *buffer_option = None;
+
+        // Destroys the SDL construct to prevent memory leaks
+        SDL_DestroyRenderer(SDL_RENDERER);
+        SDL_DestroyWindow(SDL_WINDOW);
+        SDL_Quit();
     }
 }
 
@@ -108,4 +192,6 @@ fn main() {
         update();
         render();
     }
+
+    shutdown();
 }

@@ -8,3 +8,9 @@ pub const SDL_KEYDOWN: u32 = 0x300;
 
 // Escape Key
 pub const SDLK_ESCAPE: i32 = 0x1B;
+
+// PIXEL FORMAT
+pub const SDL_PIXELFORMAT_ARGB8888: u32 = 0x16362004;
+
+// SDL TEXTURE ACCESS
+pub const SDL_TEXTUREACCESS_STREAMING: i32 = 1;
