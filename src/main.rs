@@ -1,4 +1,3 @@
-use std::sync::Mutex;
 use std::sync::atomic::AtomicBool;
 use std::sync::atomic::Ordering;
 
@@ -8,8 +7,6 @@ use display::SDL_TEXTURE;
 use display::WINDOW_HEIGHT;
 use display::WINDOW_WIDTH;
 use display::clear_color_buffer;
-use display::draw_grid;
-use display::draw_pixel;
 use display::draw_rect;
 use display::initialise_window;
 use display::render_color_buffer;
@@ -32,6 +29,7 @@ extern crate sdl2_sys;
 mod display;
 mod vector;
 
+const FOV_FACTOR: f32 = 640.0;
 const N_POINTS: i32 = 9 * 9 * 9;
 const ZERO_VECTOR3: Vector3 = Vector3 {
     x: 0.0,
@@ -39,7 +37,12 @@ const ZERO_VECTOR3: Vector3 = Vector3 {
     z: 0.0,
 };
 
+const ZERO_VECTOR2: Vector2 = Vector2 { x: 0.0, y: 0.0 };
+
+const CAMERA: Vector3 = Vector3 {x: 0.0, y: 0.0, z: -5.0};
+
 static mut CUBE_POINTS: [Vector3; N_POINTS as usize] = [ZERO_VECTOR3; N_POINTS as usize];
+static mut PROJECTED_POINTS: [Vector2; N_POINTS as usize] = [ZERO_VECTOR2; N_POINTS as usize];
 
 static IS_RUNNING: AtomicBool = AtomicBool::new(false);
 
@@ -60,7 +63,7 @@ fn setup() {
             WINDOW_WIDTH,
             WINDOW_HEIGHT,
         );
-        
+
         let mut point_count = 0;
 
         // X-LOOP
@@ -106,19 +109,43 @@ fn process_input() {
     }
 }
 
-fn update() {}
+// Returns a vector ignoring the z-axis
+fn project(vector: &Vector3) -> Vector2 {
+    Vector2::new((FOV_FACTOR * vector.x) / vector.z, (FOV_FACTOR * vector.y) / vector.z)
+}
+
+fn update() {
+    unsafe {
+        for i in 0..N_POINTS {
+            let point = &CUBE_POINTS[i as usize];
+            let mut point_camera_pov = Vector3::new(point.x, point.y, point.z);
+
+            point_camera_pov.z -= CAMERA.z;
+
+            // Save the projected 2D points in an array of projected points
+            PROJECTED_POINTS[i as usize] = project(&point_camera_pov);
+        }
+    }
+}
 
 fn render() {
     unsafe {
+        // Must clear before drawing
+        clear_color_buffer(0xFF000000);
         SDL_SetRenderDrawColor(SDL_RENDERER, 255, 0, 0, 255);
         SDL_RenderClear(SDL_RENDERER);
-        clear_color_buffer(0xFF000000);
 
-        draw_grid();
-        draw_rect(200, 200, 120, 160, 0xFF00FF00);
-        draw_pixel(20, 20, 0xFFFF00FF);
+        for i in 0..N_POINTS {
+            let point = &PROJECTED_POINTS[i as usize];
+
+            let point_x_translated: i32 = point.x as i32 + (WINDOW_WIDTH / 2);
+            let point_y_translated: i32 = point.y as i32 + (WINDOW_HEIGHT / 2);
+
+            draw_rect(point_x_translated, point_y_translated, 4, 4, 0xFFFF00FF);
+        }
 
         render_color_buffer();
+
         SDL_RenderPresent(SDL_RENDERER);
     }
 }
@@ -127,8 +154,6 @@ fn main() {
     IS_RUNNING.store(initialise_window(), Ordering::SeqCst);
 
     setup();
-
-    let vec2 = Vector2::new(10.0, 20.0);
 
     while IS_RUNNING.load(Ordering::SeqCst) {
         process_input();

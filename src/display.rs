@@ -136,33 +136,25 @@ pub fn draw_grid() {
     }
 }
 
-pub fn draw_rect(x_pos: u32, y_pos: u32, width: u32, height: u32, color: u32) {
-    let mut buffer_option = COLOR_BUFFER
-        .lock()
-        .expect("Failed to acquire lock for the COLOR_BUFFER");
-
-    unsafe {
-        if let Some(buffer) = buffer_option.as_mut() {
-            for y in 0..height {
-                for x in 0..width {
-                    let current_x = x_pos + x;
-                    let current_y = y_pos + y;
-                    buffer[((WINDOW_WIDTH as u32 * current_y) + current_x) as usize] = color;
-                }
-            }
+pub fn draw_rect(x_pos: i32, y_pos: i32, width: u32, height: u32, color: u32) {
+    for y in 0..height {
+        for x in 0..width {
+            let current_x = x_pos + x as i32;
+            let current_y = y_pos + y as i32;
+            draw_pixel(current_x, current_y, color);
         }
     }
 }
 
-pub fn draw_pixel(x: u32, y: u32, color: u32) {
+pub fn draw_pixel(x: i32, y: i32, color: u32) {
     unsafe {
-        if x < WINDOW_WIDTH as u32 && y < WINDOW_HEIGHT as u32 {
+        if x >= 0 && x < WINDOW_WIDTH as i32 && y >= 0 && y < WINDOW_HEIGHT as i32 {
             let mut buffer_option = COLOR_BUFFER
                 .lock()
                 .expect("Failed to acquire lock for the COLOR_BUFFER");
 
             if let Some(buffer) = buffer_option.as_mut() {
-                buffer[((WINDOW_WIDTH as u32 * y) + x) as usize] = color;
+                buffer[((WINDOW_WIDTH as i32 * y) + x) as usize] = color;
             }
         }
     }
