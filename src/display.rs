@@ -7,6 +7,9 @@ use sdl2_sys::{
     SDL_Window, SDL_WindowFlags,
 };
 
+pub const FPS: i32 = 30;
+pub const FRAME_TARGET_TIME: i32 = 1000 / FPS;
+
 pub static mut WINDOW_WIDTH: i32 = 800;
 pub static mut WINDOW_HEIGHT: i32 = 600;
 

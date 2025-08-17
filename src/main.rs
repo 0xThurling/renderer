@@ -2,6 +2,7 @@ use std::sync::atomic::AtomicBool;
 use std::sync::atomic::Ordering;
 
 use display::COLOR_BUFFER;
+use display::FRAME_TARGET_TIME;
 use display::SDL_RENDERER;
 use display::SDL_TEXTURE;
 use display::WINDOW_HEIGHT;
@@ -14,6 +15,7 @@ use display::shutdown;
 use sdl2_sys::SDL_CreateTexture;
 use sdl2_sys::SDL_Event;
 use sdl2_sys::SDL_EventType;
+use sdl2_sys::SDL_GetTicks;
 use sdl2_sys::SDL_KeyCode;
 use sdl2_sys::SDL_PixelFormatEnum;
 use sdl2_sys::SDL_PollEvent;
@@ -25,6 +27,9 @@ use vector::Vector2;
 use vector::Vector3;
 
 extern crate sdl2_sys;
+
+#[macro_use]
+mod macros;
 
 mod display;
 mod vector;
@@ -46,6 +51,8 @@ static mut CUBE_POINTS: [Vector3; N_POINTS as usize] = [ZERO_VECTOR3; N_POINTS a
 static mut PROJECTED_POINTS: [Vector2; N_POINTS as usize] = [ZERO_VECTOR2; N_POINTS as usize];
 
 static IS_RUNNING: AtomicBool = AtomicBool::new(false);
+
+static mut PREVIOUS_FRAME_TIME: u32 = 0;
 
 fn setup() {
     // Allocate the memory needed for the COLOR_BUFFER
@@ -117,6 +124,11 @@ fn project(vector: &Vector3) -> Vector2 {
 
 fn update() {
     unsafe {
+        // NOTE: Check if the timer has passed our specified values
+        while !sdl_ticks_passed!(SDL_GetTicks(), PREVIOUS_FRAME_TIME + FRAME_TARGET_TIME as u32) {}
+
+        PREVIOUS_FRAME_TIME = SDL_GetTicks();
+
         CUBE_ROTATION.x += 0.01;
         CUBE_ROTATION.y += 0.01;
         CUBE_ROTATION.z += 0.01;
