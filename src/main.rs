@@ -40,6 +40,7 @@ const ZERO_VECTOR3: Vector3 = Vector3 {
 const ZERO_VECTOR2: Vector2 = Vector2 { x: 0.0, y: 0.0 };
 
 const CAMERA: Vector3 = Vector3 {x: 0.0, y: 0.0, z: -5.0};
+static mut CUBE_ROTATION: Vector3 = Vector3 {x: 0.0, y: 0.0, z: 0.0};
 
 static mut CUBE_POINTS: [Vector3; N_POINTS as usize] = [ZERO_VECTOR3; N_POINTS as usize];
 static mut PROJECTED_POINTS: [Vector2; N_POINTS as usize] = [ZERO_VECTOR2; N_POINTS as usize];
@@ -116,14 +117,22 @@ fn project(vector: &Vector3) -> Vector2 {
 
 fn update() {
     unsafe {
+        CUBE_ROTATION.x += 0.01;
+        CUBE_ROTATION.y += 0.01;
+        CUBE_ROTATION.z += 0.01;
+
         for i in 0..N_POINTS {
             let point = &CUBE_POINTS[i as usize];
-            let mut point_camera_pov = Vector3::new(point.x, point.y, point.z);
+            let point_camera_pov = Vector3::new(point.x, point.y, point.z);
 
-            point_camera_pov.z -= CAMERA.z;
+            let mut transformed_point = point_camera_pov.rotate_x(CUBE_ROTATION.x);
+            transformed_point = transformed_point.rotate_y(CUBE_ROTATION.y);
+            transformed_point = transformed_point.rotate_z(CUBE_ROTATION.z);
+
+            transformed_point.z -= CAMERA.z;
 
             // Save the projected 2D points in an array of projected points
-            PROJECTED_POINTS[i as usize] = project(&point_camera_pov);
+            PROJECTED_POINTS[i as usize] = project(&transformed_point);
         }
     }
 }
@@ -141,7 +150,7 @@ fn render() {
             let point_x_translated: i32 = point.x as i32 + (WINDOW_WIDTH / 2);
             let point_y_translated: i32 = point.y as i32 + (WINDOW_HEIGHT / 2);
 
-            draw_rect(point_x_translated, point_y_translated, 4, 4, 0xFFFF00FF);
+            draw_rect(point_x_translated, point_y_translated, 4, 4, 0xFF00FFFF);
         }
 
         render_color_buffer();
