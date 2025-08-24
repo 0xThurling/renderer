@@ -13,6 +13,7 @@ use display::initialise_window;
 use display::render_color_buffer;
 use display::shutdown;
 use sdl2_sys::SDL_CreateTexture;
+use sdl2_sys::SDL_Delay;
 use sdl2_sys::SDL_Event;
 use sdl2_sys::SDL_EventType;
 use sdl2_sys::SDL_GetTicks;
@@ -26,16 +27,24 @@ use sdl2_sys::SDL_TextureAccess;
 use vector::Vector2;
 use vector::Vector3;
 
+use crate::display::draw_line;
+use crate::display::draw_triangle;
+use crate::mesh::MESH_FACES;
+use crate::mesh::MESH_VERTICES;
+use crate::mesh::N_MESH_FACES;
+use crate::triangle::Triangle;
+
 extern crate sdl2_sys;
 
 #[macro_use]
 mod macros;
 
 mod display;
+mod mesh;
+mod triangle;
 mod vector;
 
 const FOV_FACTOR: f32 = 640.0;
-const N_POINTS: i32 = 9 * 9 * 9;
 const ZERO_VECTOR3: Vector3 = Vector3 {
     x: 0.0,
     y: 0.0,
@@ -43,15 +52,26 @@ const ZERO_VECTOR3: Vector3 = Vector3 {
 };
 
 const ZERO_VECTOR2: Vector2 = Vector2 { x: 0.0, y: 0.0 };
+const CAMERA: Vector3 = Vector3 {
+    x: 0.0,
+    y: 0.0,
+    z: -5.0,
+};
 
-const CAMERA: Vector3 = Vector3 {x: 0.0, y: 0.0, z: -5.0};
-static mut CUBE_ROTATION: Vector3 = Vector3 {x: 0.0, y: 0.0, z: 0.0};
+// Set empty triangles
+const ZERO_TRIANGLE: Triangle = Triangle {
+    points: [ZERO_VECTOR2; 3],
+};
+static mut TRIANGLES_TO_RENDER: [Triangle; N_MESH_FACES as usize] =
+    [ZERO_TRIANGLE; N_MESH_FACES as usize];
 
-static mut CUBE_POINTS: [Vector3; N_POINTS as usize] = [ZERO_VECTOR3; N_POINTS as usize];
-static mut PROJECTED_POINTS: [Vector2; N_POINTS as usize] = [ZERO_VECTOR2; N_POINTS as usize];
+static mut CUBE_ROTATION: Vector3 = Vector3 {
+    x: 0.0,
+    y: 0.0,
+    z: 0.0,
+};
 
 static IS_RUNNING: AtomicBool = AtomicBool::new(false);
-
 static mut PREVIOUS_FRAME_TIME: u32 = 0;
 
 fn setup() {
@@ -71,29 +91,6 @@ fn setup() {
             WINDOW_WIDTH,
             WINDOW_HEIGHT,
         );
-
-        let mut point_count = 0;
-
-        // X-LOOP
-        let mut x = -1.0;
-        while x <= 1.0 {
-            // Y-LOOP
-            let mut y = -1.0;
-            while y <= 1.0 {
-                // Z-LOOP
-                let mut z = -1.0;
-                while z <= 1.0 {
-                    let vec = Vector3::new(x, y, z);
-
-                    CUBE_POINTS[point_count] = vec;
-                    point_count += 1; // NOTE: This might break
-
-                    z += 0.25;
-                }
-                y += 0.25;
-            }
-            x += 0.25;
-        }
     }
 }
 
@@ -119,13 +116,28 @@ fn process_input() {
 
 // Returns a vector ignoring the z-axis
 fn project(vector: &Vector3) -> Vector2 {
-    Vector2::new((FOV_FACTOR * vector.x) / vector.z, (FOV_FACTOR * vector.y) / vector.z)
+    Vector2::new(
+        (FOV_FACTOR * vector.x) / vector.z,
+        (FOV_FACTOR * vector.y) / vector.z,
+    )
+}
+
+// Function for othographic projections
+fn orthographic_project(vector: &Vector3) -> Vector2 {
+    Vector2::new(
+        (128.0 * vector.x), 
+        (128.0 * vector.y)
+    )
 }
 
 fn update() {
     unsafe {
         // NOTE: Check if the timer has passed our specified values
-        while !sdl_ticks_passed!(SDL_GetTicks(), PREVIOUS_FRAME_TIME + FRAME_TARGET_TIME as u32) {}
+        let time_to_wait = FRAME_TARGET_TIME - (SDL_GetTicks() - PREVIOUS_FRAME_TIME) as i32;
+
+        if time_to_wait > 0 && time_to_wait <= FRAME_TARGET_TIME {
+            SDL_Delay(time_to_wait as u32);
+        }
 
         PREVIOUS_FRAME_TIME = SDL_GetTicks();
 
@@ -133,18 +145,45 @@ fn update() {
         CUBE_ROTATION.y += 0.01;
         CUBE_ROTATION.z += 0.01;
 
-        for i in 0..N_POINTS {
-            let point = &CUBE_POINTS[i as usize];
-            let point_camera_pov = Vector3::new(point.x, point.y, point.z);
+        for i in 0..N_MESH_FACES {
+            let face = &MESH_FACES[i as usize];
 
-            let mut transformed_point = point_camera_pov.rotate_x(CUBE_ROTATION.x);
-            transformed_point = transformed_point.rotate_y(CUBE_ROTATION.y);
-            transformed_point = transformed_point.rotate_z(CUBE_ROTATION.z);
+            let face_vertices: [Vector3; 3] = [
+                MESH_VERTICES[(face.a - 1) as usize].clone(),
+                MESH_VERTICES[(face.b - 1) as usize].clone(),
+                MESH_VERTICES[(face.c - 1) as usize].clone(),
+            ];
 
-            transformed_point.z -= CAMERA.z;
+            let mut projected_triangle = ZERO_TRIANGLE;
 
-            // Save the projected 2D points in an array of projected points
-            PROJECTED_POINTS[i as usize] = project(&transformed_point);
+            // Loop all three vertices of this current face and apply transformations
+            for j in 0..3 {
+                let transformed_vertex = &face_vertices[j as usize];
+                let point_camera_pov = Vector3::new(
+                    transformed_vertex.x,
+                    transformed_vertex.y,
+                    transformed_vertex.z,
+                );
+
+                let mut transformed_vertex = point_camera_pov.rotate_x(CUBE_ROTATION.x);
+                transformed_vertex = transformed_vertex.rotate_y(CUBE_ROTATION.y);
+                transformed_vertex = transformed_vertex.rotate_z(CUBE_ROTATION.z);
+
+                // NOTE: This might be needed depending on the view of the cube mesh
+                // Translate the vertices away from the camera
+                transformed_vertex.z -= CAMERA.z;
+
+                let mut projected_point = project(&transformed_vertex);
+
+                // NOTE: Scale and translate point to the middle of the screen
+                projected_point.x += (WINDOW_WIDTH / 2) as f32;
+                projected_point.y += (WINDOW_HEIGHT / 2) as f32;
+
+                projected_triangle.points[j] = projected_point;
+            }
+
+            // Save projected triangle in the array of triangles to render 
+            TRIANGLES_TO_RENDER[i as usize] = projected_triangle;
         }
     }
 }
@@ -156,13 +195,23 @@ fn render() {
         SDL_SetRenderDrawColor(SDL_RENDERER, 255, 0, 0, 255);
         SDL_RenderClear(SDL_RENDERER);
 
-        for i in 0..N_POINTS {
-            let point = &PROJECTED_POINTS[i as usize];
+        // NOTE: Loop projected triangles and render them
+        for i in 0..N_MESH_FACES {
+            let triangle = &TRIANGLES_TO_RENDER[i as usize];
 
-            let point_x_translated: i32 = point.x as i32 + (WINDOW_WIDTH / 2);
-            let point_y_translated: i32 = point.y as i32 + (WINDOW_HEIGHT / 2);
+            draw_rect(triangle.points[0].x as i32, triangle.points[0].y as i32, 3, 3, 0xFF00CC00);
+            draw_rect(triangle.points[1].x as i32, triangle.points[1].y as i32, 3, 3, 0xFF00CC00);
+            draw_rect(triangle.points[2].x as i32, triangle.points[2].y as i32, 3, 3, 0xFF00CC00);
 
-            draw_rect(point_x_translated, point_y_translated, 4, 4, 0xFF00FFFF);
+            draw_triangle(
+                triangle.points[0].x as i32,
+                triangle.points[0].y as i32, 
+                triangle.points[1].x as i32,
+                triangle.points[1].y as i32,
+                triangle.points[2].x as i32,
+                triangle.points[2].y as i32,
+                0xFF00CC00
+            );          
         }
 
         render_color_buffer();

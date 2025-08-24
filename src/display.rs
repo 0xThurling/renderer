@@ -7,7 +7,7 @@ use sdl2_sys::{
     SDL_Window, SDL_WindowFlags,
 };
 
-pub const FPS: i32 = 30;
+pub const FPS: i32 = 60;
 pub const FRAME_TARGET_TIME: i32 = 1000 / FPS;
 
 pub static mut WINDOW_WIDTH: i32 = 800;
@@ -139,6 +139,12 @@ pub fn draw_grid() {
     }
 }
 
+pub fn draw_triangle(x0: i32, y0: i32, x1: i32, y1: i32, x2: i32, y2: i32, color: u32) {
+   draw_line(x0, y0, x1, y1, color); 
+   draw_line(x1, y1, x2, y2, color); 
+   draw_line(x2, y2, x0, y0, color); 
+}
+
 pub fn draw_rect(x_pos: i32, y_pos: i32, width: u32, height: u32, color: u32) {
     for y in 0..height {
         for x in 0..width {
@@ -160,6 +166,36 @@ pub fn draw_pixel(x: i32, y: i32, color: u32) {
                 buffer[((WINDOW_WIDTH as i32 * y) + x) as usize] = color;
             }
         }
+    }
+}
+
+/// Draws a line between two x,y points
+pub fn draw_line(x0: i32, y0: i32, x1: i32, y1: i32, color: u32) {
+    let delta_x = x1 - x0;
+    let delta_y = y1 - y0;
+
+    let longest_length_side = if i32::abs(delta_x) >= i32::abs(delta_y) {
+        i32::abs(delta_x)
+    } else {
+        i32::abs(delta_y)
+    };
+
+    let x_inc = delta_x as f32 / longest_length_side as f32;
+    let y_inc = delta_y as f32 / longest_length_side as f32;
+
+    let mut current_x = x0 as f32;
+    let mut current_y = y0 as f32;
+
+    for _ in 0..=longest_length_side {
+        // Gets the rounded value fo the pixel coordinate on screen
+        draw_pixel(
+            f32::round(current_x) as i32,
+            f32::round(current_y) as i32,
+            color,
+        );
+
+        current_x += x_inc;
+        current_y += y_inc;
     }
 }
 
