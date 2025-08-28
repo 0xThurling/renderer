@@ -125,8 +125,8 @@ fn project(vector: &Vector3) -> Vector2 {
 // Function for othographic projections
 fn orthographic_project(vector: &Vector3) -> Vector2 {
     Vector2::new(
-        (128.0 * vector.x), 
-        (128.0 * vector.y)
+        128.0 * vector.x, 
+        128.0 * vector.y
     )
 }
 
