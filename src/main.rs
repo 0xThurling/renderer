@@ -1,3 +1,5 @@
+use std::sync::LazyLock;
+use std::sync::Mutex;
 use std::sync::atomic::AtomicBool;
 use std::sync::atomic::Ordering;
 
@@ -27,11 +29,8 @@ use sdl2_sys::SDL_TextureAccess;
 use vector::Vector2;
 use vector::Vector3;
 
-use crate::display::draw_line;
 use crate::display::draw_triangle;
-use crate::mesh::MESH_FACES;
-use crate::mesh::MESH_VERTICES;
-use crate::mesh::N_MESH_FACES;
+use crate::mesh::MESH;
 use crate::triangle::Triangle;
 
 extern crate sdl2_sys;
@@ -62,14 +61,8 @@ const CAMERA: Vector3 = Vector3 {
 const ZERO_TRIANGLE: Triangle = Triangle {
     points: [ZERO_VECTOR2; 3],
 };
-static mut TRIANGLES_TO_RENDER: [Triangle; N_MESH_FACES as usize] =
-    [ZERO_TRIANGLE; N_MESH_FACES as usize];
 
-static mut CUBE_ROTATION: Vector3 = Vector3 {
-    x: 0.0,
-    y: 0.0,
-    z: 0.0,
-};
+static TRIANGLES_TO_RENDER: LazyLock<Mutex<Vec<Triangle>>> = LazyLock::new(|| Mutex::new(vec![]));
 
 static IS_RUNNING: AtomicBool = AtomicBool::new(false);
 static mut PREVIOUS_FRAME_TIME: u32 = 0;
@@ -92,6 +85,8 @@ fn setup() {
             WINDOW_HEIGHT,
         );
     }
+
+    MESH.lock().unwrap().load_cube_mesh_data();
 }
 
 fn process_input() {
@@ -124,10 +119,7 @@ fn project(vector: &Vector3) -> Vector2 {
 
 // Function for othographic projections
 fn orthographic_project(vector: &Vector3) -> Vector2 {
-    Vector2::new(
-        128.0 * vector.x, 
-        128.0 * vector.y
-    )
+    Vector2::new(128.0 * vector.x, 128.0 * vector.y)
 }
 
 fn update() {
@@ -141,17 +133,19 @@ fn update() {
 
         PREVIOUS_FRAME_TIME = SDL_GetTicks();
 
-        CUBE_ROTATION.x += 0.01;
-        CUBE_ROTATION.y += 0.01;
-        CUBE_ROTATION.z += 0.01;
+        let mut mesh = MESH.lock().unwrap();
 
-        for i in 0..N_MESH_FACES {
-            let face = &MESH_FACES[i as usize];
+        mesh.rotation.x += 0.01;
+        mesh.rotation.y += 0.01;
+        mesh.rotation.z += 0.01;
+
+        for i in 0..mesh.faces.len() {
+            let face = &mesh.faces[i as usize];
 
             let face_vertices: [Vector3; 3] = [
-                MESH_VERTICES[(face.a - 1) as usize].clone(),
-                MESH_VERTICES[(face.b - 1) as usize].clone(),
-                MESH_VERTICES[(face.c - 1) as usize].clone(),
+                mesh.vertices[(face.a - 1) as usize].clone(),
+                mesh.vertices[(face.b - 1) as usize].clone(),
+                mesh.vertices[(face.c - 1) as usize].clone(),
             ];
 
             let mut projected_triangle = ZERO_TRIANGLE;
@@ -165,9 +159,9 @@ fn update() {
                     transformed_vertex.z,
                 );
 
-                let mut transformed_vertex = point_camera_pov.rotate_x(CUBE_ROTATION.x);
-                transformed_vertex = transformed_vertex.rotate_y(CUBE_ROTATION.y);
-                transformed_vertex = transformed_vertex.rotate_z(CUBE_ROTATION.z);
+                let mut transformed_vertex = point_camera_pov.rotate_x(mesh.rotation.x);
+                transformed_vertex = transformed_vertex.rotate_y(mesh.rotation.y);
+                transformed_vertex = transformed_vertex.rotate_z(mesh.rotation.z);
 
                 // NOTE: This might be needed depending on the view of the cube mesh
                 // Translate the vertices away from the camera
@@ -182,8 +176,8 @@ fn update() {
                 projected_triangle.points[j] = projected_point;
             }
 
-            // Save projected triangle in the array of triangles to render 
-            TRIANGLES_TO_RENDER[i as usize] = projected_triangle;
+            // Save projected triangle in the array of triangles to render
+            TRIANGLES_TO_RENDER.lock().unwrap().push(projected_triangle);
         }
     }
 }
@@ -195,29 +189,67 @@ fn render() {
         SDL_SetRenderDrawColor(SDL_RENDERER, 255, 0, 0, 255);
         SDL_RenderClear(SDL_RENDERER);
 
-        // NOTE: Loop projected triangles and render them
-        for i in 0..N_MESH_FACES {
-            let triangle = &TRIANGLES_TO_RENDER[i as usize];
+        let mut triangle_arr = TRIANGLES_TO_RENDER.lock().unwrap();
 
-            draw_rect(triangle.points[0].x as i32, triangle.points[0].y as i32, 3, 3, 0xFF00CC00);
-            draw_rect(triangle.points[1].x as i32, triangle.points[1].y as i32, 3, 3, 0xFF00CC00);
-            draw_rect(triangle.points[2].x as i32, triangle.points[2].y as i32, 3, 3, 0xFF00CC00);
+        // NOTE: Loop projected triangles and render them
+        for i in 0..triangle_arr.len() {
+            let triangle = &triangle_arr[i as usize];
+
+            draw_rect(
+                triangle.points[0].x as i32,
+                triangle.points[0].y as i32,
+                3,
+                3,
+                0xFF00CC00,
+            );
+            draw_rect(
+                triangle.points[1].x as i32,
+                triangle.points[1].y as i32,
+                3,
+                3,
+                0xFF00CC00,
+            );
+            draw_rect(
+                triangle.points[2].x as i32,
+                triangle.points[2].y as i32,
+                3,
+                3,
+                0xFF00CC00,
+            );
 
             draw_triangle(
                 triangle.points[0].x as i32,
-                triangle.points[0].y as i32, 
+                triangle.points[0].y as i32,
                 triangle.points[1].x as i32,
                 triangle.points[1].y as i32,
                 triangle.points[2].x as i32,
                 triangle.points[2].y as i32,
-                0xFF00CC00
-            );          
+                0xFF00CC00,
+            );
         }
+
+        // Clear triangles for the next frame to push mesh data
+        triangle_arr.clear();
 
         render_color_buffer();
 
         SDL_RenderPresent(SDL_RENDERER);
     }
+}
+
+/////////////////////////////////////////////////////////////////
+// Free memory resourses
+// Will be used to free manually allocated stuff
+////////////////////////////////////////////////////////////////
+fn free_resources() {
+    // Clear the mesh data
+    let mut mesh = MESH.lock().unwrap();
+    mesh.vertices.clear();
+    mesh.faces.clear();
+
+    // Clear the memory in the COLOR_BUFFER
+    let mut buffer_option = COLOR_BUFFER.lock().unwrap();
+    *buffer_option = None;
 }
 
 fn main() {
@@ -232,4 +264,5 @@ fn main() {
     }
 
     shutdown();
+    free_resources();
 }

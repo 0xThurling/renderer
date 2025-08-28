@@ -199,12 +199,9 @@ pub fn draw_line(x0: i32, y0: i32, x1: i32, y1: i32, color: u32) {
     }
 }
 
+// Clear the memory allocation for all SDL functions
 pub fn shutdown() {
     unsafe {
-        // Clear the memory in the COLOR_BUFFER
-        let mut buffer_option = COLOR_BUFFER.lock().unwrap();
-        *buffer_option = None;
-
         // Destroys the SDL construct to prevent memory leaks
         SDL_DestroyRenderer(SDL_RENDERER);
         SDL_DestroyWindow(SDL_WINDOW);
