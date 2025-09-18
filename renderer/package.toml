@@ -1,0 +1,7 @@
+[project]
+name = "renderer"
+type = "executable"
+install_headers = false
+
+[dependencies]
+sdl = { git = "https://github.com/libsdl-org/SDL.git", tag = "release-2.30.3", target="SDL2::SDL2" }
