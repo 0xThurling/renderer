@@ -2,6 +2,8 @@
 #include "SDL_keycode.h"
 #include "SDL_pixels.h"
 #include "SDL_render.h"
+#include "SDL_timer.h"
+#include "array.h"
 #include "display.h"
 #include "mesh.h"
 #include "triangle.h"
@@ -82,6 +84,47 @@ vec2_t orthographic_project(vec3_t vector) {
 
   return projected_point;
 }
+
+/////////////////////////////////////////////////////////////
+//// Update function frame by frame with a fixed time step
+/////////////////////////////////////////////////////////////
+void update() {
+  int time_to_wait = FRAME_TARGET_TIME - (SDL_GetTicks() - previous_frame_time);
+
+  // Only delay execution if we are running too fast
+  if (time_to_wait > 0 && time_to_wait <= FRAME_TARGET_TIME) {
+    SDL_Delay(time_to_wait);
+  }
+
+  previous_frame_time = SDL_GetTicks();
+
+  // Initialize the array of triangle to render
+  triangles_to_render = NULL;
+
+  mesh.rotation.x += 0.01;
+  mesh.rotation.y += 0.01;
+  mesh.rotation.z += 0.01;
+
+  // Loop all triangle faces of our mesh
+  int num_faces = array_length(mesh.faces);
+
+  for (int i = 1; i < num_faces; i++) {
+    face_t mesh_face = mesh.faces[i];
+
+    vec3_t face_vertices[3];
+    face_vertices[0] = mesh.vertices[mesh_face.a - 1];
+    face_vertices[1] = mesh.vertices[mesh_face.b - 1];
+    face_vertices[2] = mesh.vertices[mesh_face.c - 1];
+
+    triangle_t projected_triangle;
+  }
+}
+
+
+
+
+
+
 
 int main() {
     std::cout << "Hello, C++ World!" << std::endl;
