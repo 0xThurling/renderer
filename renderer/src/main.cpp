@@ -1,5 +1,87 @@
-#include <iostream>
+#include "SDL_events.h"
+#include "SDL_keycode.h"
+#include "SDL_pixels.h"
+#include "SDL_render.h"
 #include "display.h"
+#include "mesh.h"
+#include "triangle.h"
+#include "vector.h"
+#include <cstddef>
+#include <cstdint>
+#include <cstdlib>
+#include <iostream>
+
+/////////////////////////////////////////////////////////////
+//// Array of triangle that should be rendered frame by frame
+/////////////////////////////////////////////////////////////
+triangle_t* triangles_to_render = NULL;
+
+/////////////////////////////////////////////////////////////
+//// Array of triangle that should be rendered frame by frame
+/////////////////////////////////////////////////////////////
+bool is_running = false;
+int previous_frame_time = 0;
+
+vec3_t camera_position = {.x = 0, .y = 0, .z = -5};
+float fov_factor = 640;
+
+/////////////////////////////////////////////////////////////
+//// Array of triangle that should be rendered frame by frame
+/////////////////////////////////////////////////////////////
+void setup() {
+  color_buffer = (uint32_t*)malloc(sizeof(uint32_t) * window_width * window_height);
+
+  color_buffer_texture = SDL_CreateTexture(
+      renderer,
+      SDL_PIXELFORMAT_ARGB8888,
+      SDL_TEXTUREACCESS_STREAMING,
+      window_width,
+      window_height
+  );
+  
+  load_cube_mesh_data();
+}
+
+/////////////////////////////////////////////////////////////
+//// Poll system events and handle keyboard input
+/////////////////////////////////////////////////////////////
+void process_input() {
+  SDL_Event event;
+  SDL_PollEvent(&event);
+  switch (event.type) {
+    case SDL_QUIT:
+      is_running = false;
+      break;
+    case SDL_KEYDOWN:
+      if (event.key.keysym.sym == SDLK_ESCAPE) {
+        is_running = false;
+      }
+      break;
+  }
+}
+
+/////////////////////////////////////////////////////////////
+//// Function that recieves a 3D vector and returns
+//// a projected 2D point
+/////////////////////////////////////////////////////////////
+vec2_t project(vec3_t point) {
+  vec2_t projected_point = {
+    .x = (fov_factor * point.x) / point.z,
+    .y = (fov_factor * point.y) / point.z
+  };
+
+  return projected_point;
+}
+
+// Function for othographic projections
+vec2_t orthographic_project(vec3_t vector) {
+  vec2_t projected_point = {
+    .x = (fov_factor * vector.x),
+    .y = (fov_factor * vector.y) 
+  };
+
+  return projected_point;
+}
 
 int main() {
     std::cout << "Hello, C++ World!" << std::endl;
