@@ -12,6 +12,7 @@
 #include <cstdint>
 #include <cstdlib>
 #include <iostream>
+#include <ostream>
 
 /////////////////////////////////////////////////////////////
 //// Array of triangle that should be rendered frame by frame
@@ -117,16 +118,95 @@ void update() {
     face_vertices[2] = mesh.vertices[mesh_face.c - 1];
 
     triangle_t projected_triangle;
+
+    // Loop all three vertices of this current face
+    // and apply transformations
+    for (int j = 0; j < 3; j++) {
+      vec3_t transformed_vertex = face_vertices[j];
+
+      transformed_vertex = vec3_rotate_x(transformed_vertex, mesh.rotation.x);
+      transformed_vertex = vec3_rotate_y(transformed_vertex, mesh.rotation.y);
+      transformed_vertex = vec3_rotate_z(transformed_vertex, mesh.rotation.z);
+
+      // Translate the vertex away from the camera
+      transformed_vertex.z -= camera_position.z;
+
+      // Project the current vertex
+      vec2_t projected_point = project(transformed_vertex);
+
+      // Scale and translate the project point to
+      // the middle of the seen
+      projected_point.x += (window_width / 2);
+      projected_point.y += (window_height / 2);
+
+      projected_triangle.points[j] = projected_point;
+    }
+
+    array_push(triangles_to_render, projected_triangle);
   }
+}
+
+/////////////////////////////////////////////////////////////
+//// Render function to draw objects on the display
+/////////////////////////////////////////////////////////////
+void render() {
+  clear_color_buffer(0xFF000000);
+
+  // Loop all projected triangles and render them
+  int num_triangles = array_length(triangles_to_render);
+  for (int i = 0; i < num_triangles; i++) {
+    triangle_t triangle = triangles_to_render[i];
+
+    // Draw vertex points
+    draw_rect(triangle.points[0].x, triangle.points[0].y, 3, 3, 0xFFFFFF00);
+    draw_rect(triangle.points[1].x, triangle.points[1].y, 3, 3, 0xFFFFFF00);
+    draw_rect(triangle.points[2].x, triangle.points[2].y, 3, 3, 0xFFFFFF00);
+
+    draw_triangle(
+        triangle.points[0].x, triangle.points[0].y,
+        triangle.points[1].x, triangle.points[1].y,
+        triangle.points[2].x, triangle.points[2].y,
+        0xFF00FF00
+    );
+  }
+
+  // Clear array of triangles to render every frame
+  array_free(triangles_to_render);
+
+  render_color_buffer();
+
+  SDL_RenderPresent(renderer);
+}
+
+/////////////////////////////////////////////////////////////
+//// Render function to draw objects on the display
+/////////////////////////////////////////////////////////////
+void free_resources() {
+  free(color_buffer);
+  array_free(mesh.faces);
+  array_free(mesh.vertices);
 }
 
 
 
-
-
-
-
+/////////////////////////////////////////////////////////////
+//// Render function to draw objects on the display
+/////////////////////////////////////////////////////////////
 int main() {
-    std::cout << "Hello, C++ World!" << std::endl;
-    return 0;
+  is_running = initialize_window();
+
+  setup();
+
+  while (is_running) {
+    process_input();
+    update();
+    render();
+  }
+
+  destroy_window();
+  free_resources();
+  
+  std::cout << is_running << std::endl;
+
+  return 0;
 }

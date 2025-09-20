@@ -50,13 +50,13 @@ bool initialize_window() {
     return false;
   }
 
-  return false;
+  return true;
 }
 
 void draw_grid() {
   for (int y = 0; y < window_height; y += 10) {
     for (int x = 0; x < window_width; x += 10) {
-      color_buffer[(window_width * y) + y] = 0xFF444444;
+        color_buffer[(window_width * y) + x] = 0xFF000000;
     }
   }
 }
