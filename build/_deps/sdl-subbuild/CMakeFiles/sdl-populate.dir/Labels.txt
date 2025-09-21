@@ -1,0 +1,14 @@
+# Target labels
+ sdl-populate
+# Source files and their labels
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-subbuild/CMakeFiles/sdl-populate
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-subbuild/CMakeFiles/sdl-populate.rule
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-subbuild/CMakeFiles/sdl-populate-complete.rule
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-subbuild/sdl-populate-prefix/src/sdl-populate-stamp/sdl-populate-build.rule
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-subbuild/sdl-populate-prefix/src/sdl-populate-stamp/sdl-populate-configure.rule
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-subbuild/sdl-populate-prefix/src/sdl-populate-stamp/sdl-populate-download.rule
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-subbuild/sdl-populate-prefix/src/sdl-populate-stamp/sdl-populate-install.rule
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-subbuild/sdl-populate-prefix/src/sdl-populate-stamp/sdl-populate-mkdir.rule
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-subbuild/sdl-populate-prefix/src/sdl-populate-stamp/sdl-populate-patch.rule
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-subbuild/sdl-populate-prefix/src/sdl-populate-stamp/sdl-populate-test.rule
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-subbuild/sdl-populate-prefix/src/sdl-populate-stamp/sdl-populate-update.rule

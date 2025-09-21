@@ -1,0 +1,3 @@
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-subbuild/CMakeFiles/sdl-populate.dir
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-subbuild/CMakeFiles/edit_cache.dir
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-subbuild/CMakeFiles/rebuild_cache.dir

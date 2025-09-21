@@ -1,0 +1,11 @@
+/Users/jacquesthurling/personal-projects/render/renderer/build/CMakeFiles/renderer.dir
+/Users/jacquesthurling/personal-projects/render/renderer/build/CMakeFiles/edit_cache.dir
+/Users/jacquesthurling/personal-projects/render/renderer/build/CMakeFiles/rebuild_cache.dir
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-build/CMakeFiles/sdl_headers_copy.dir
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-build/CMakeFiles/SDL2main.dir
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-build/CMakeFiles/SDL2.dir
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-build/CMakeFiles/SDL2-static.dir
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-build/CMakeFiles/SDL2_test.dir
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-build/CMakeFiles/uninstall.dir
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-build/CMakeFiles/edit_cache.dir
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-build/CMakeFiles/rebuild_cache.dir

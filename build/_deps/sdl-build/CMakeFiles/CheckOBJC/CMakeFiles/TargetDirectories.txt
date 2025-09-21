@@ -1,0 +1,2 @@
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-build/CMakeFiles/CheckOBJC/CMakeFiles/edit_cache.dir
+/Users/jacquesthurling/personal-projects/render/renderer/build/_deps/sdl-build/CMakeFiles/CheckOBJC/CMakeFiles/rebuild_cache.dir
