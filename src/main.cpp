@@ -25,8 +25,8 @@ triangle_t* triangles_to_render = NULL;
 bool is_running = false;
 int previous_frame_time = 0;
 
-vec3_t camera_position = {.x = 0, .y = 0, .z = -5};
-float fov_factor = 640;
+vec3_t camera_position = {.x = 0, .y = 0, .z = -1};
+float fov_factor = 1500;
 
 /////////////////////////////////////////////////////////////
 //// Array of triangle that should be rendered frame by frame
@@ -42,7 +42,7 @@ void setup() {
       window_height
   );
   
-  load_cube_mesh_data();
+  load_obj_file_data("./assets/bunny.obj");
 }
 
 /////////////////////////////////////////////////////////////
