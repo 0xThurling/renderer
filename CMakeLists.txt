@@ -8,7 +8,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 include(FetchContent)
 
 # --- Dependencies ---
-FetchContent_Declare(sdl GIT_REPOSITORY "https://github.com/libsdl-org/SDL.git" GIT_TAG "release-2.30.3")
+FetchContent_Declare(sdl GIT_REPOSITORY "https://github.com/libsdl-org/SDL.git" GIT_TAG "release-2.32.10")
 
 FetchContent_MakeAvailable(sdl)
 

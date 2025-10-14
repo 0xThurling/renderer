@@ -5,7 +5,6 @@
 #include <cstddef>
 #include <cstdio>
 #include <cstring>
-#include <iostream>
 
 mesh_t mesh = {.vertices = NULL, .faces = NULL, .rotation = {0, 0, 0}};
 
