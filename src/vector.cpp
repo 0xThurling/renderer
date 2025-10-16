@@ -23,6 +23,20 @@ vec2_t vec2_sub(vec2_t a, vec2_t b) {
     .y = a.y - b.y
   };
 }
+
+vec2_t vec2_mul(vec2_t v, float factor) {
+  return {
+    .x = v.x * factor,
+    .y = v.y * factor   
+  };
+}
+
+vec2_t vec2_div(vec2_t v, float factor) {
+  return {
+    .x = v.x / factor,
+    .y = v.y / factor   
+  };
+}
 ////////////////////////////////////
 /// Vec 3 functions
 ////////////////////////////////////
@@ -44,6 +58,30 @@ vec3_t vec3_sub(vec3_t a, vec3_t b) {
     .x = a.x - b.x,
     .y = a.y - b.y,
     .z = a.z - b.z
+  };
+}
+
+vec3_t vec3_mul(vec3_t v, float factor) {
+ return {
+    .x = v.x * factor,
+    .y = v.y * factor,
+    .z = v.z * factor
+ };
+}
+
+vec3_t vec3_div(vec3_t v, float factor) {
+ return {
+    .x = v.x / factor,
+    .y = v.y / factor,
+    .z = v.z / factor
+ };
+}
+
+vec3_t vec3_cross(vec3_t a, vec3_t b) {
+  return {
+    .x = a.y * b.z - a.z * b.y,
+    .y = a.z * b.x - a.x * b.z,
+    .z = a.x * b.y - a.y * b.x,
   };
 }
 ////////////////////////////////////
