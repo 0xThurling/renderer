@@ -25,8 +25,8 @@ triangle_t* triangles_to_render = NULL;
 bool is_running = false;
 int previous_frame_time = 0;
 
-vec3_t camera_position = {.x = 0, .y = 0, .z = -15};
-float fov_factor = 780;
+vec3_t camera_position = {.x = 0, .y = 0, .z = 0};
+float fov_factor = 640;
 
 /////////////////////////////////////////////////////////////
 //// Array of triangle that should be rendered frame by frame
@@ -42,7 +42,7 @@ void setup() {
       window_height
   );
   
-  load_obj_file_data("./assets/teapot.obj");
+  load_obj_file_data("./assets/cube.obj");
 }
 
 /////////////////////////////////////////////////////////////
@@ -117,7 +117,7 @@ void update() {
     face_vertices[1] = mesh.vertices[mesh_face.b - 1];
     face_vertices[2] = mesh.vertices[mesh_face.c - 1];
 
-    triangle_t projected_triangle;
+    vec3_t transformed_vertices[3];
 
     // Loop all three vertices of this current face
     // and apply transformations
@@ -129,10 +129,33 @@ void update() {
       transformed_vertex = vec3_rotate_z(transformed_vertex, mesh.rotation.z);
 
       // Translate the vertex away from the camera
-      transformed_vertex.z -= camera_position.z;
+      transformed_vertex.z += 5;
 
+      // Save transformed vertex in the array of the transformed vertices
+      transformed_vertices[j] = transformed_vertex;
+    }
+
+    // Check the backface culling check 
+    vec3_t vector_a = transformed_vertices[0]; // VEC A
+    vec3_t vector_b = transformed_vertices[1]; // VEC B
+    vec3_t vector_c = transformed_vertices[2]; // VEC C
+
+    vec3_t vector_ab = vec3_sub(vector_b,  vector_a);
+    vec3_t vector_ac = vec3_sub(vector_c,  vector_a);
+
+    vec3_t normal = vec3_cross(vector_ab, vector_ac);
+
+    vec3_t camera_ray = vec3_sub(camera_position, vector_a); 
+
+    float dot_product = vec3_dot(normal, camera_ray);
+
+    if (dot_product < 0) continue;
+    
+    triangle_t projected_triangle;
+    // Loop all three vertices to perform projection
+    for (int j = 0; j < 3; j++) {
       // Project the current vertex
-      vec2_t projected_point = project(transformed_vertex);
+      vec2_t projected_point = project(transformed_vertices[j]);
 
       // Scale and translate the project point to
       // the middle of the seen

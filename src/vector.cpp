@@ -90,7 +90,7 @@ vec3_t vec3_cross(vec3_t a, vec3_t b) {
 }
 
 float vec3_dot(vec3_t a, vec3_t b) {
-  return (a.x * b.x) + (a.y * b.y) + (a.z * a.z);
+  return (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
 }
 ////////////////////////////////////
 /// Vec rotation functions
