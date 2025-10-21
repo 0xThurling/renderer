@@ -12,8 +12,8 @@ SDL_Window *window = NULL;
 SDL_Renderer *renderer = NULL;
 uint32_t *color_buffer = NULL;
 SDL_Texture *color_buffer_texture = NULL;
-int window_width = 800;
-int window_height = 600;
+int window_width = 1280;
+int window_height = 720;
 
 bool initialize_window() {
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
@@ -24,8 +24,10 @@ bool initialize_window() {
   // Set width and height of the SDL window with max screen resolution
   SDL_DisplayMode display_mode;
   SDL_GetCurrentDisplayMode(0, &display_mode);
-  window_width = display_mode.w;
-  window_height = display_mode.h;
+
+  // This will set the display to fullscreen mode
+  // window_width = display_mode.w;
+  // window_height = display_mode.h;
 
   // CREATE SDL window
   window = SDL_CreateWindow(
