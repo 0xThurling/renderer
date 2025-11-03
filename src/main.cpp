@@ -176,25 +176,22 @@ void render() {
   clear_color_buffer(0xFF000000);
 
   // // Loop all projected triangles and render them
-  // int num_triangles = array_length(triangles_to_render);
-  // for (int i = 0; i < num_triangles; i++) {
-  //   triangle_t triangle = triangles_to_render[i];
-  //
-  //   // Draw vertex points
-  //   draw_rect(triangle.points[0].x, triangle.points[0].y, 3, 3, 0xFFFFFF00);
-  //   draw_rect(triangle.points[1].x, triangle.points[1].y, 3, 3, 0xFFFFFF00);
-  //   draw_rect(triangle.points[2].x, triangle.points[2].y, 3, 3, 0xFFFFFF00);
-  //
-  //   draw_triangle(
-  //       triangle.points[0].x, triangle.points[0].y,
-  //       triangle.points[1].x, triangle.points[1].y,
-  //       triangle.points[2].x, triangle.points[2].y,
-  //       0xFF00FF00
-  //   );
-  // }
+  int num_triangles = array_length(triangles_to_render);
+  for (int i = 0; i < num_triangles; i++) {
+    triangle_t triangle = triangles_to_render[i];
 
-  draw_triangle(300, 300, 100, 400, 500, 700, 0xFF00FF00);
-  draw_filled_triangle(300, 300, 100, 400, 500, 700, 0xFF00FF00);
+    // Draw vertex points
+    draw_rect(triangle.points[0].x, triangle.points[0].y, 3, 3, 0xFFFFFF00);
+    draw_rect(triangle.points[1].x, triangle.points[1].y, 3, 3, 0xFFFFFF00);
+    draw_rect(triangle.points[2].x, triangle.points[2].y, 3, 3, 0xFFFFFF00);
+
+    draw_filled_triangle(
+        triangle.points[0].x, triangle.points[0].y,
+        triangle.points[1].x, triangle.points[1].y,
+        triangle.points[2].x, triangle.points[2].y,
+        0xFF00FF00
+    );
+  }
 
   // Clear array of triangles to render every frame
   array_free(triangles_to_render);
