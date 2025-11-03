@@ -62,5 +62,5 @@ void draw_filled_triangle(int x0, int y0, int x1, int y1, int x2, int y2, uint32
   int Mx = (((x2 - x0) * (y1 - y0)) / (y2 - y0)) + x0;
   
   fill_flat_bottom_triangle(x0, y0, x1, y1, Mx, My, 0xFFFFFF00);
-  fill_flat_top_triangle(x1, y1, Mx, My, x2, x2, 0xFFFF00FF);
+  fill_flat_top_triangle(x1, y1, Mx, My, x2, y2, 0xFFFF00FF);
 }
