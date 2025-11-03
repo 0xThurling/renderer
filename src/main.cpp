@@ -193,7 +193,8 @@ void render() {
   //   );
   // }
 
-  draw_triangle(300, 100, 50, 400, 500, 700, 0xFF00FF00);
+  draw_triangle(300, 300, 100, 400, 500, 700, 0xFF00FF00);
+  draw_filled_triangle(300, 300, 100, 400, 500, 700, 0xFF00FF00);
 
   // Clear array of triangles to render every frame
   array_free(triangles_to_render);

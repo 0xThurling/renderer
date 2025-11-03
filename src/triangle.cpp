@@ -1,5 +1,5 @@
 #include "triangle.h"
-#include <cstdint>
+#include "display.h"
 
 void int_swap(int* a, int* b) {
   int tmp = *a;
@@ -7,12 +7,37 @@ void int_swap(int* a, int* b) {
   *b = tmp;
 }
 
+//////////////////////////////////////////////
+// Draw a filled triangle with a flat bottom
+//////////////////////////////////////////////
 void fill_flat_bottom_triangle(int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color) {
-  // TODO: Implement the draw filled triangle function
+  float inv_slope_1 = (float)(x1 - x0) / (y1 - y0);
+  float inv_slope_2 = (float)(x2 - x0) / (y2 - y0);
+
+  // Start x_start and x_end from the top vertex
+  float x_start = x0;
+  float x_end = x0;
+
+  for (int y = y0; y <= y2; y++) {
+    draw_line(x_start, y, x_end, y, color);
+    x_start += inv_slope_1;
+    x_end += inv_slope_2;
+  }
 }
 
 void fill_flat_top_triangle(int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color) {
-  // TODO: Implement the draw filled triangle function
+  float inv_slope_1 = (float)(x2 - x0) / (y2 - y0);
+  float inv_slope_2 = (float)(x2 - x1) / (y2 - y1);
+
+  // Start x_start and x_end from the top vertex
+  float x_start = x2;
+  float x_end = x2;
+
+  for (int y = y2; y >= y0; y--) {
+    draw_line(x_start, y, x_end, y, color);
+    x_start -= inv_slope_1;
+    x_end -= inv_slope_2;
+  }
 }
 
 void draw_filled_triangle(int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color) {
@@ -34,7 +59,7 @@ void draw_filled_triangle(int x0, int y0, int x1, int y1, int x2, int y2, uint32
 
   // Calculate the new vertex (mx, my) using triangle similarity
   int My = y1;
-  int Mx = (static_cast<float>(x2 - x0) * static_cast<float>(y1 - y0) / static_cast<float>(y2 - y0)) + x0;
+  int Mx = (((x2 - x0) * (y1 - y0)) / (y2 - y0)) + x0;
   
   fill_flat_bottom_triangle(x0, y0, x1, y1, Mx, My, 0xFFFFFF00);
   fill_flat_top_triangle(x1, y1, Mx, My, x2, x2, 0xFFFF00FF);
