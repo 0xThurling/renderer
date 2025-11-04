@@ -32,6 +32,9 @@ float fov_factor = 640;
 //// Array of triangle that should be rendered frame by frame
 /////////////////////////////////////////////////////////////
 void setup() {
+  render_method = RENDER_WIRE;
+  cull_method = CULL_BACKFACE;
+
   color_buffer = (uint32_t*)malloc(sizeof(uint32_t) * window_width * window_height);
 
   color_buffer_texture = SDL_CreateTexture(
@@ -58,6 +61,24 @@ void process_input() {
     case SDL_KEYDOWN:
       if (event.key.keysym.sym == SDLK_ESCAPE) {
         is_running = false;
+      }
+      if (event.key.keysym.sym == SDLK_1) {
+        render_method = RENDER_WIRE_VERTEX;
+      }
+      if (event.key.keysym.sym == SDLK_2) {
+        render_method = RENDER_WIRE;
+      }
+      if (event.key.keysym.sym == SDLK_3) {
+        render_method = RENDER_FILL_TRIANGLE;
+      }
+      if (event.key.keysym.sym == SDLK_4) {
+        render_method = RENDER_FILL_TRIANGLE_WIRE;
+      }
+      if (event.key.keysym.sym == SDLK_c) {
+        cull_method = CULL_BACKFACE;
+      }
+      if (event.key.keysym.sym == SDLK_d) {
+        cull_method = CULL_NONE;
       }
       break;
   }
