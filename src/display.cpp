@@ -97,7 +97,7 @@ void draw_triangle(int x0, int y0, int x1, int y1, int x2, int y2, uint32_t colo
 void draw_rect(int x, int y, int width, int height, uint32_t color) {
   for (int i = 0; i < width; i++) {
     for (int j = 0; j < height; j++) {
-      int current_x = x + j; 
+      int current_x = x + i; 
       int current_y = y + j; 
       draw_pixel(current_x, current_y, color);
     }

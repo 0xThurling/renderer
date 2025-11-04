@@ -1,3 +1,4 @@
+#pragma once
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
@@ -9,17 +10,22 @@
 #define FPS 60
 #define FRAME_TARGET_TIME (1000/FPS)
 
-enum cull_method {
+
+enum Cull_Method {
   CULL_NONE,
   CULL_BACKFACE
-} cull_method;
+};
 
-enum render_method {
+extern Cull_Method cull_method;
+
+enum Render_Method {
   RENDER_WIRE,
   RENDER_WIRE_VERTEX,
   RENDER_FILL_TRIANGLE,
   RENDER_FILL_TRIANGLE_WIRE
-} render_method;
+};
+
+extern Render_Method render_method;
 
 extern SDL_Window* window;
 extern SDL_Renderer* renderer;

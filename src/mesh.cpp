@@ -5,6 +5,7 @@
 #include <cstddef>
 #include <cstdio>
 #include <cstring>
+#include <string>
 
 mesh_t mesh = {.vertices = NULL, .faces = NULL, .rotation = {0, 0, 0}};
 
@@ -51,9 +52,9 @@ void load_cube_mesh_data() {
   }
 }
 
-void load_obj_file_data(char *filename) {
+void load_obj_file_data(std::string filename) {
   FILE* file;
-  file = fopen(filename, "r");
+  file = fopen(filename.c_str(), "r");
   char line[1024];
 
   while (fgets(line, 1024, file)) {
