@@ -224,9 +224,9 @@ void render() {
 
     if (render_method == RENDER_WIRE_VERTEX) {
       // Draw vertex points
-      draw_rect(triangle.points[0].x, triangle.points[0].y, 5, 5, 0xFFFF0000);
-      draw_rect(triangle.points[1].x, triangle.points[1].y, 5, 5, 0xFFFF0000);
-      draw_rect(triangle.points[2].x, triangle.points[2].y, 5, 5, 0xFFFF0000);
+      draw_rect(triangle.points[0].x - 3, triangle.points[0].y - 3, 6, 6, 0xFFFF0000);
+      draw_rect(triangle.points[1].x - 3, triangle.points[1].y - 3, 6, 6, 0xFFFF0000);
+      draw_rect(triangle.points[2].x - 3, triangle.points[2].y - 3, 6, 6, 0xFFFF0000);
     }
   }
 
