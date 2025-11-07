@@ -46,7 +46,8 @@ void setup() {
       window_height
   );
   
-  load_obj_file_data("./assets/cube.obj");
+  // load_obj_file_data("./assets/cube.obj");
+  load_cube_mesh_data();
 }
 
 /////////////////////////////////////////////////////////////
@@ -131,7 +132,7 @@ void update() {
   // Loop all triangle faces of our mesh
   int num_faces = array_length(mesh.faces);
 
-  for (int i = 1; i < num_faces; i++) {
+  for (int i = 0; i < num_faces; i++) {
     face_t mesh_face = mesh.faces[i];
 
     vec3_t face_vertices[3];
@@ -172,22 +173,30 @@ void update() {
 
       float dot_product = vec3_dot(normal, camera_ray);
 
-      if (dot_product < 0) continue;
+      if (dot_product <= 0) continue;
     }
-    
-    triangle_t projected_triangle;
+
+    vec2_t projected_points[3];
+
     // Loop all three vertices to perform projection
     for (int j = 0; j < 3; j++) {
       // Project the current vertex
-      vec2_t projected_point = project(transformed_vertices[j]);
+      projected_points[j] = project(transformed_vertices[j]);
 
       // Scale and translate the project point to
       // the middle of the seen
-      projected_point.x += (window_width / 2);
-      projected_point.y += (window_height / 2);
-
-      projected_triangle.points[j] = projected_point;
+      projected_points[j].x += (window_width / 2);
+      projected_points[j].y += (window_height / 2);
     }
+
+    triangle_t projected_triangle = {
+      .points = {
+        { projected_points[0].x, projected_points[0].y },
+        { projected_points[1].x, projected_points[1].y },
+        { projected_points[2].x, projected_points[2].y },
+      },
+      .color = mesh_face.color 
+    };
 
     array_push(triangles_to_render, projected_triangle);
   }
@@ -209,7 +218,7 @@ void render() {
           triangle.points[0].x, triangle.points[0].y,
           triangle.points[1].x, triangle.points[1].y,
           triangle.points[2].x, triangle.points[2].y,
-          0xFF555555
+          triangle.color 
       );
     }
 
