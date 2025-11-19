@@ -30,7 +30,7 @@ bool is_running = false;
 int previous_frame_time = 0;
 
 vec3_t camera_position = {.x = 0, .y = 0, .z = 0};
-float fov_factor = 640;
+mat4_t proj_matrix;
 
 /////////////////////////////////////////////////////////////
 //// Array of triangle that should be rendered frame by frame
@@ -45,7 +45,14 @@ void setup() {
       window_width,
       window_height
   );
-  
+
+  // Initialize the perspective projection matrix
+  float fov = M_PI / 3.0; // 180 deg / 3 = 60 deg
+  float aspect = (float)window_height / (float)window_width;
+  float znear = 1.0;
+  float zfar = 100.0;
+  proj_matrix = mat4_make_perspective(fov, aspect, znear, zfar);
+
   // load_obj_file_data("./assets/cube.obj");
   load_cube_mesh_data();
 }
@@ -87,29 +94,6 @@ void process_input() {
 }
 
 /////////////////////////////////////////////////////////////
-//// Function that recieves a 3D vector and returns
-//// a projected 2D point
-/////////////////////////////////////////////////////////////
-vec2_t project(vec3_t point) {
-  vec2_t projected_point = {
-    .x = (fov_factor * point.x) / point.z,
-    .y = (fov_factor * point.y) / point.z
-  };
-
-  return projected_point;
-}
-
-// Function for othographic projections
-vec2_t orthographic_project(vec3_t vector) {
-  vec2_t projected_point = {
-    .x = (fov_factor * vector.x),
-    .y = (fov_factor * vector.y) 
-  };
-
-  return projected_point;
-}
-
-/////////////////////////////////////////////////////////////
 //// Update function frame by frame with a fixed time step
 /////////////////////////////////////////////////////////////
 void update() {
@@ -126,8 +110,8 @@ void update() {
   triangles_to_render = NULL;
 
   mesh.rotation.x += 0.01;
-  mesh.rotation.y += 0.01;
-  mesh.rotation.z += 0.01;
+  // mesh.rotation.y += 0.01;
+  // mesh.rotation.z += 0.01;
 
   mesh.translation.z = 5.0;
 
@@ -189,17 +173,20 @@ void update() {
       if (dot_product <= 0) continue;
     }
 
-    vec2_t projected_points[3];
+    vec4_t projected_points[3];
 
     // Loop all three vertices to perform projection
     for (int j = 0; j < 3; j++) {
       // Project the current vertex
-      projected_points[j] = project(vec3_from_vec4(transformed_vertices[j]));
+      projected_points[j] = mat4_mul_vec4_project(proj_matrix, transformed_vertices[j]);
 
-      // Scale and translate the project point to
-      // the middle of the seen
-      projected_points[j].x += (window_width / 2);
-      projected_points[j].y += (window_height / 2);
+      // Scale into the view
+      projected_points[j].x *= (window_width/2.0);
+      projected_points[j].y *= (window_height/2.0);
+      
+      // translate the project point the middle of the seen
+      projected_points[j].x += (window_width / 2.0);
+      projected_points[j].y += (window_height / 2.0);
     }
     
     // Calculate the avg Z value of the vertices after the transformation
