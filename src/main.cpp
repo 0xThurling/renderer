@@ -111,7 +111,7 @@ void update() {
 
   mesh.rotation.x += 0.01;
   // mesh.rotation.y += 0.01;
-  // mesh.rotation.z += 0.01;
+  mesh.rotation.z += 0.01;
 
   mesh.translation.z = 5.0;
 
