@@ -1,0 +1,50 @@
+\doxysection{vector.\+h}
+\hypertarget{vector_8h_source}{}\label{vector_8h_source}\index{src/vector.h@{src/vector.h}}
+\mbox{\hyperlink{vector_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ VECTOR\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ VECTOR\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00005\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structvec2__t_a60b1d954391c7cf8cdd75214332c0ed7}{x}};}
+\DoxyCodeLine{00006\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structvec2__t_a3bf013d969c4e9f04466076795fd3271}{y}};}
+\DoxyCodeLine{00007\ \}\ \mbox{\hyperlink{structvec2__t}{vec2\_t}};}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00010\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structvec3__t_a043a094721132b97719040196e0a4dab}{x}};}
+\DoxyCodeLine{00011\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structvec3__t_a6834aa3ce8705c3607101453ee78d5bc}{y}};}
+\DoxyCodeLine{00012\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structvec3__t_a0480b4b654c5b1877b5c1dbb1564dcf8}{z}};}
+\DoxyCodeLine{00013\ \}\ \mbox{\hyperlink{structvec3__t}{vec3\_t}};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00016\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structvec4__t_ad2fbafa2239dc9fd20a91524dbf0b85e}{x}};}
+\DoxyCodeLine{00017\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structvec4__t_ae02fff68097997cbe7ef9baf8ae22c4e}{y}};}
+\DoxyCodeLine{00018\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structvec4__t_a8b304789747fe4a22eb84d464ee1dd5f}{z}};}
+\DoxyCodeLine{00019\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structvec4__t_a2dea7e8a691c508efe3582e99f87cbe3}{w}};}
+\DoxyCodeLine{00020\ \}\ \mbox{\hyperlink{structvec4__t}{vec4\_t}};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00025\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{vector_8h_ab6ce2ce44be323af344d0a025081bf7b}{vec2\_length}}(\mbox{\hyperlink{structvec2__t}{vec2\_t}}\ v);}
+\DoxyCodeLine{00026\ \mbox{\hyperlink{structvec2__t}{vec2\_t}}\ \mbox{\hyperlink{vector_8h_af5790f0785043a300a147489cfdc20e6}{vec2\_add}}(\mbox{\hyperlink{structvec2__t}{vec2\_t}}\ a,\ \mbox{\hyperlink{structvec2__t}{vec2\_t}}\ b);}
+\DoxyCodeLine{00027\ \mbox{\hyperlink{structvec2__t}{vec2\_t}}\ \mbox{\hyperlink{vector_8h_a7054cd216e2a97b8b472c4e4e9af5fe0}{vec2\_sub}}(\mbox{\hyperlink{structvec2__t}{vec2\_t}}\ a,\ \mbox{\hyperlink{structvec2__t}{vec2\_t}}\ b);}
+\DoxyCodeLine{00028\ \mbox{\hyperlink{structvec2__t}{vec2\_t}}\ \mbox{\hyperlink{vector_8h_a7ef912fce91b0d5448d05fc7e543724b}{vec2\_mul}}(\mbox{\hyperlink{structvec2__t}{vec2\_t}}\ v,\ \textcolor{keywordtype}{float}\ factor);}
+\DoxyCodeLine{00029\ \mbox{\hyperlink{structvec2__t}{vec2\_t}}\ \mbox{\hyperlink{vector_8h_a6ee5a502d1490819f749dee0e9f4799c}{vec2\_div}}(\mbox{\hyperlink{structvec2__t}{vec2\_t}}\ v,\ \textcolor{keywordtype}{float}\ factor);}
+\DoxyCodeLine{00030\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{vector_8h_a2d1a06dd12ab805456cec19a20933a27}{vec2\_dot}}(\mbox{\hyperlink{structvec2__t}{vec2\_t}}\ a,\ \mbox{\hyperlink{structvec2__t}{vec2\_t}}\ b);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{vector_8h_ad5f9d8bbe29e5d3f94ef7e9e4e13468f}{vec3\_length}}(\mbox{\hyperlink{structvec3__t}{vec3\_t}}\ v);}
+\DoxyCodeLine{00036\ \mbox{\hyperlink{structvec3__t}{vec3\_t}}\ \mbox{\hyperlink{vector_8h_a4cf893028b9f660b003372c15badfba1}{vec3\_add}}(\mbox{\hyperlink{structvec3__t}{vec3\_t}}\ a,\ \mbox{\hyperlink{structvec3__t}{vec3\_t}}\ b);}
+\DoxyCodeLine{00037\ \mbox{\hyperlink{structvec3__t}{vec3\_t}}\ \mbox{\hyperlink{vector_8h_ac5d28f92999dc9b6914b3cbadd9bd01a}{vec3\_sub}}(\mbox{\hyperlink{structvec3__t}{vec3\_t}}\ a,\ \mbox{\hyperlink{structvec3__t}{vec3\_t}}\ b);}
+\DoxyCodeLine{00038\ \mbox{\hyperlink{structvec3__t}{vec3\_t}}\ \mbox{\hyperlink{vector_8h_a3df27608a1aed4f48740c176ed32e32d}{vec3\_mul}}(\mbox{\hyperlink{structvec3__t}{vec3\_t}}\ v,\ \textcolor{keywordtype}{float}\ factor);}
+\DoxyCodeLine{00039\ \mbox{\hyperlink{structvec3__t}{vec3\_t}}\ \mbox{\hyperlink{vector_8h_a17b71bb0a31442beab64af248f73978c}{vec3\_div}}(\mbox{\hyperlink{structvec3__t}{vec3\_t}}\ v,\ \textcolor{keywordtype}{float}\ factor);}
+\DoxyCodeLine{00040\ \mbox{\hyperlink{structvec3__t}{vec3\_t}}\ \mbox{\hyperlink{vector_8h_a0266c00e0e8c7ab496c64a63a43eb8b2}{vec3\_cross}}(\mbox{\hyperlink{structvec3__t}{vec3\_t}}\ a,\ \mbox{\hyperlink{structvec3__t}{vec3\_t}}\ b);}
+\DoxyCodeLine{00041\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{vector_8h_a6cbe2ad22d1d1245c503e9629a39a4e5}{vec3\_dot}}(\mbox{\hyperlink{structvec3__t}{vec3\_t}}\ a,\ \mbox{\hyperlink{structvec3__t}{vec3\_t}}\ b);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \mbox{\hyperlink{structvec3__t}{vec3\_t}}\ \mbox{\hyperlink{vector_8h_a3674ed8cccbb3666cd3c614e37a74c54}{vec3\_rotate\_x}}(\mbox{\hyperlink{structvec3__t}{vec3\_t}}\ v,\ \textcolor{keywordtype}{float}\ angle);}
+\DoxyCodeLine{00044\ \mbox{\hyperlink{structvec3__t}{vec3\_t}}\ \mbox{\hyperlink{vector_8h_ab3b55ee26c6dc621947583b99b9a382a}{vec3\_rotate\_y}}(\mbox{\hyperlink{structvec3__t}{vec3\_t}}\ v,\ \textcolor{keywordtype}{float}\ angle);}
+\DoxyCodeLine{00045\ \mbox{\hyperlink{structvec3__t}{vec3\_t}}\ \mbox{\hyperlink{vector_8h_a1dd66d67d4226ff968d0cbbbbd8e0c0f}{vec3\_rotate\_z}}(\mbox{\hyperlink{structvec3__t}{vec3\_t}}\ v,\ \textcolor{keywordtype}{float}\ angle);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00050\ \mbox{\hyperlink{structvec4__t}{vec4\_t}}\ \mbox{\hyperlink{vector_8h_a1977b5d88da205bdb69c427382f695d6}{vec4\_from\_vec3}}(\mbox{\hyperlink{structvec3__t}{vec3\_t}}\ v);}
+\DoxyCodeLine{00051\ \mbox{\hyperlink{structvec3__t}{vec3\_t}}\ \mbox{\hyperlink{vector_8h_af3aba5dae09487742213b18a26fb7f89}{vec3\_from\_vec4}}(\mbox{\hyperlink{structvec4__t}{vec4\_t}}\ v);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ VECTOR\_H}}
+
+\end{DoxyCode}

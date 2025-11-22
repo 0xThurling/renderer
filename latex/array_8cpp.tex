@@ -1,0 +1,125 @@
+\doxysection{src/array.cpp File Reference}
+\hypertarget{array_8cpp}{}\label{array_8cpp}\index{src/array.cpp@{src/array.cpp}}
+{\ttfamily \#include "{}array.\+h"{}}\newline
+{\ttfamily \#include $<$cstddef$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{array_8cpp_a9daa954bbed95e6a96351238cc5dabb9}{ARRAY\+\_\+\+RAW\+\_\+\+DATA}}(array)
+\item 
+\#define \mbox{\hyperlink{array_8cpp_a4354d9488b1d4a40fca5262aff959ade}{ARRAY\+\_\+\+CAPACITY}}(array)
+\item 
+\#define \mbox{\hyperlink{array_8cpp_a4e271601a6e9da8eab9970c619ae5d83}{ARRAY\+\_\+\+OCCUPIED}}(array)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{array_8cpp_a70d42b5366afe796eebebf08f04bbbba}{array\+\_\+hold}} (void \texorpdfstring{$\ast$}{*}array, int count, int item\+\_\+size)
+\item 
+double \mbox{\hyperlink{array_8cpp_aedf29c0ca642efa1c794db9937d4d8a1}{calculate\+Compound\+Interest}} (double principal, double annual\+Rate, int times\+Compounded, int years)
+\item 
+int \mbox{\hyperlink{array_8cpp_a82b56a985c3bcc09e84fd0e087511918}{array\+\_\+length}} (void \texorpdfstring{$\ast$}{*}array)
+\begin{DoxyCompactList}\small\item\em testing \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{array_8cpp_ab577e9147a35a54120cc944a517b5049}{array\+\_\+free}} (void \texorpdfstring{$\ast$}{*}array)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{array_8cpp_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{array_8cpp_a4354d9488b1d4a40fca5262aff959ade}\index{array.cpp@{array.cpp}!ARRAY\_CAPACITY@{ARRAY\_CAPACITY}}
+\index{ARRAY\_CAPACITY@{ARRAY\_CAPACITY}!array.cpp@{array.cpp}}
+\doxysubsubsection{\texorpdfstring{ARRAY\_CAPACITY}{ARRAY\_CAPACITY}}
+{\footnotesize\ttfamily \label{array_8cpp_a4354d9488b1d4a40fca5262aff959ade} 
+\#define ARRAY\+\_\+\+CAPACITY(\begin{DoxyParamCaption}\item[{}]{array}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\mbox{\hyperlink{array_8cpp_a9daa954bbed95e6a96351238cc5dabb9}{ARRAY\_RAW\_DATA}}(array)[0])}
+
+\end{DoxyCode}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{_2_users_2jacquesthurling_2personal-projects_2render_2renderer_2src_2array_8cpp-example}{/\+Users/jacquesthurling/personal-\/projects/render/renderer/src/array.\+cpp}}.\end{Desc}
+\Hypertarget{array_8cpp_a4e271601a6e9da8eab9970c619ae5d83}\index{array.cpp@{array.cpp}!ARRAY\_OCCUPIED@{ARRAY\_OCCUPIED}}
+\index{ARRAY\_OCCUPIED@{ARRAY\_OCCUPIED}!array.cpp@{array.cpp}}
+\doxysubsubsection{\texorpdfstring{ARRAY\_OCCUPIED}{ARRAY\_OCCUPIED}}
+{\footnotesize\ttfamily \label{array_8cpp_a4e271601a6e9da8eab9970c619ae5d83} 
+\#define ARRAY\+\_\+\+OCCUPIED(\begin{DoxyParamCaption}\item[{}]{array}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\mbox{\hyperlink{array_8cpp_a9daa954bbed95e6a96351238cc5dabb9}{ARRAY\_RAW\_DATA}}(array)[1])}
+
+\end{DoxyCode}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{_2_users_2jacquesthurling_2personal-projects_2render_2renderer_2src_2array_8cpp-example}{/\+Users/jacquesthurling/personal-\/projects/render/renderer/src/array.\+cpp}}.\end{Desc}
+\Hypertarget{array_8cpp_a9daa954bbed95e6a96351238cc5dabb9}\index{array.cpp@{array.cpp}!ARRAY\_RAW\_DATA@{ARRAY\_RAW\_DATA}}
+\index{ARRAY\_RAW\_DATA@{ARRAY\_RAW\_DATA}!array.cpp@{array.cpp}}
+\doxysubsubsection{\texorpdfstring{ARRAY\_RAW\_DATA}{ARRAY\_RAW\_DATA}}
+{\footnotesize\ttfamily \label{array_8cpp_a9daa954bbed95e6a96351238cc5dabb9} 
+\#define ARRAY\+\_\+\+RAW\+\_\+\+DATA(\begin{DoxyParamCaption}\item[{}]{array}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((\textcolor{keywordtype}{int}\ *)(array)\ -\/\ 2)}
+
+\end{DoxyCode}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{_2_users_2jacquesthurling_2personal-projects_2render_2renderer_2src_2array_8cpp-example}{/\+Users/jacquesthurling/personal-\/projects/render/renderer/src/array.\+cpp}}.\end{Desc}
+
+
+\label{doc-func-members}
+\Hypertarget{array_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{array_8cpp_ab577e9147a35a54120cc944a517b5049}\index{array.cpp@{array.cpp}!array\_free@{array\_free}}
+\index{array\_free@{array\_free}!array.cpp@{array.cpp}}
+\doxysubsubsection{\texorpdfstring{array\_free()}{array\_free()}}
+{\footnotesize\ttfamily \label{array_8cpp_ab577e9147a35a54120cc944a517b5049} 
+void array\+\_\+free (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{array}{}\end{DoxyParamCaption})}
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{_2_users_2jacquesthurling_2personal-projects_2render_2renderer_2src_2array_8cpp-example}{/\+Users/jacquesthurling/personal-\/projects/render/renderer/src/array.\+cpp}}.\end{Desc}
+\Hypertarget{array_8cpp_a70d42b5366afe796eebebf08f04bbbba}\index{array.cpp@{array.cpp}!array\_hold@{array\_hold}}
+\index{array\_hold@{array\_hold}!array.cpp@{array.cpp}}
+\doxysubsubsection{\texorpdfstring{array\_hold()}{array\_hold()}}
+{\footnotesize\ttfamily \label{array_8cpp_a70d42b5366afe796eebebf08f04bbbba} 
+void \texorpdfstring{$\ast$}{*} array\+\_\+hold (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{array}{, }\item[{int}]{count}{, }\item[{int}]{item\+\_\+size}{}\end{DoxyParamCaption})}
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{_2_users_2jacquesthurling_2personal-projects_2render_2renderer_2src_2array_8cpp-example}{/\+Users/jacquesthurling/personal-\/projects/render/renderer/src/array.\+cpp}}.\end{Desc}
+\Hypertarget{array_8cpp_a82b56a985c3bcc09e84fd0e087511918}\index{array.cpp@{array.cpp}!array\_length@{array\_length}}
+\index{array\_length@{array\_length}!array.cpp@{array.cpp}}
+\doxysubsubsection{\texorpdfstring{array\_length()}{array\_length()}}
+{\footnotesize\ttfamily \label{array_8cpp_a82b56a985c3bcc09e84fd0e087511918} 
+int array\+\_\+length (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{array}{}\end{DoxyParamCaption})}
+
+
+
+testing 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & -\/ generic array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the length of the array 
+\end{DoxyReturn}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{_2_users_2jacquesthurling_2personal-projects_2render_2renderer_2src_2array_8cpp-example}{/\+Users/jacquesthurling/personal-\/projects/render/renderer/src/array.\+cpp}}.\end{Desc}
+\Hypertarget{array_8cpp_aedf29c0ca642efa1c794db9937d4d8a1}\index{array.cpp@{array.cpp}!calculateCompoundInterest@{calculateCompoundInterest}}
+\index{calculateCompoundInterest@{calculateCompoundInterest}!array.cpp@{array.cpp}}
+\doxysubsubsection{\texorpdfstring{calculateCompoundInterest()}{calculateCompoundInterest()}}
+{\footnotesize\ttfamily \label{array_8cpp_aedf29c0ca642efa1c794db9937d4d8a1} 
+double calculate\+Compound\+Interest (\begin{DoxyParamCaption}\item[{double}]{principal}{, }\item[{double}]{annual\+Rate}{, }\item[{int}]{times\+Compounded}{, }\item[{int}]{years}{}\end{DoxyParamCaption})}
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{_2_users_2jacquesthurling_2personal-projects_2render_2renderer_2src_2array_8cpp-example}{/\+Users/jacquesthurling/personal-\/projects/render/renderer/src/array.\+cpp}}.\end{Desc}

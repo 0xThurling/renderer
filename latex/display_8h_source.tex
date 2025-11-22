@@ -1,0 +1,53 @@
+\doxysection{display.\+h}
+\hypertarget{display_8h_source}{}\label{display_8h_source}\index{src/display.h@{src/display.h}}
+\mbox{\hyperlink{display_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ DISPLAY\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ DISPLAY\_H}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}SDL\_render.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}SDL\_video.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <SDL.h>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ FPS\ 5000}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ FRAME\_TARGET\_TIME\ (1000/FPS)}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{display_8h_a5270db69461d114f5b38b00c5a171dfb}{Cull\_Method}}\ \{}
+\DoxyCodeLine{00015\ \ \ \mbox{\hyperlink{display_8h_a5270db69461d114f5b38b00c5a171dfba9596d0df0a165837ecd253c9b06c45df}{CULL\_NONE}},}
+\DoxyCodeLine{00016\ \ \ \mbox{\hyperlink{display_8h_a5270db69461d114f5b38b00c5a171dfbac319cb28cad314b933e16958dd5b2ad6}{CULL\_BACKFACE}}}
+\DoxyCodeLine{00017\ \};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{display_8h_a5270db69461d114f5b38b00c5a171dfb}{Cull\_Method}}\ \mbox{\hyperlink{display_8h_a1b41373e8b16cdae77d752b305376b37}{cull\_method}};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{display_8h_a900afd557ddd2e0a17dbf8239235e6fe}{Render\_Method}}\ \{}
+\DoxyCodeLine{00022\ \ \ \mbox{\hyperlink{display_8h_a900afd557ddd2e0a17dbf8239235e6fea363ff0b13ca1fef580c71ab4aab7b6ac}{RENDER\_WIRE}},}
+\DoxyCodeLine{00023\ \ \ \mbox{\hyperlink{display_8h_a900afd557ddd2e0a17dbf8239235e6fea5db319d2d9eeaf996e7b1bd46658ac59}{RENDER\_WIRE\_VERTEX}},}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{display_8h_a900afd557ddd2e0a17dbf8239235e6fea0302831c173e077ddaceaf3c090221c7}{RENDER\_FILL\_TRIANGLE}},}
+\DoxyCodeLine{00025\ \ \ \mbox{\hyperlink{display_8h_a900afd557ddd2e0a17dbf8239235e6fea6d8020d9cb81898660cd2599d51d3acc}{RENDER\_FILL\_TRIANGLE\_WIRE}}}
+\DoxyCodeLine{00026\ \};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{display_8h_a900afd557ddd2e0a17dbf8239235e6fe}{Render\_Method}}\ \mbox{\hyperlink{display_8h_a1533d3561ca5643916fc8e8206b02f16}{render\_method}};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{extern}\ SDL\_Window*\ \mbox{\hyperlink{display_8cpp_aaa8e409e04dcf575ef63fd5fb3db06f9}{window}};}
+\DoxyCodeLine{00031\ \textcolor{keyword}{extern}\ SDL\_Renderer*\ \mbox{\hyperlink{display_8cpp_a966da7a60c4ea3ba301e26ccc5efe452}{renderer}};}
+\DoxyCodeLine{00032\ \textcolor{keyword}{extern}\ uint32\_t*\ \mbox{\hyperlink{display_8cpp_aa241e4160892bba86649ddb2d153fc4d}{color\_buffer}};}
+\DoxyCodeLine{00033\ \textcolor{keyword}{extern}\ SDL\_Texture*\ \mbox{\hyperlink{display_8cpp_a1c157ef9fed953a4ef91673e532a7b3a}{color\_buffer\_texture}};}
+\DoxyCodeLine{00034\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{display_8cpp_a0e2e740afd510cfe652a1836ffbad209}{window\_width}};}
+\DoxyCodeLine{00035\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{display_8cpp_aca33f926b061680d857699a22f676418}{window\_height}};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{display_8h_a700e53b79780fc4476fc5f6a0b42f841}{initialize\_window}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00038\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{display_8h_a612ebb7419fd636fba403b1f96f3aaa4}{draw\_grid}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00039\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{display_8h_a9c082403c1d37dfe836430998e7dee98}{draw\_pixel}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ uint32\_t\ color);}
+\DoxyCodeLine{00040\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{display_8h_aaedea201124b196cce11a9eb0530ccbf}{draw\_line}}(\textcolor{keywordtype}{int}\ x0,\ \textcolor{keywordtype}{int}\ y0,\ \textcolor{keywordtype}{int}\ x1,\ \textcolor{keywordtype}{int}\ y1,\ uint32\_t\ color);}
+\DoxyCodeLine{00041\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{display_8h_abe2241bf7ff022525ea30714c2772e37}{draw\_triangle}}(\textcolor{keywordtype}{int}\ x0,\ \textcolor{keywordtype}{int}\ y0,\ \textcolor{keywordtype}{int}\ x1,\ \textcolor{keywordtype}{int}\ y1,\ \textcolor{keywordtype}{int}\ x2,\ \textcolor{keywordtype}{int}\ y2,\ uint32\_t\ color);}
+\DoxyCodeLine{00042\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{display_8h_a870a20124349c7908b445a615f96823f}{draw\_rect}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{int}\ height,\ uint32\_t\ color);}
+\DoxyCodeLine{00043\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{display_8h_a42bceecf2b2335dbdb99974daa9a0219}{render\_color\_buffer}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00044\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{display_8h_a8851e0545901c1a150f48cc5a3785a1f}{clear\_color\_buffer}}(uint32\_t\ color);}
+\DoxyCodeLine{00045\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{display_8h_aa1ef1322e246837e62ac66d3282a82e2}{destroy\_window}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DISPLAY\_H}}
+
+\end{DoxyCode}

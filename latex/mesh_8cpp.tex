@@ -1,0 +1,115 @@
+\doxysection{src/mesh.cpp File Reference}
+\hypertarget{mesh_8cpp}{}\label{mesh_8cpp}\index{src/mesh.cpp@{src/mesh.cpp}}
+{\ttfamily \#include "{}mesh.\+h"{}}\newline
+{\ttfamily \#include "{}array.\+h"{}}\newline
+{\ttfamily \#include "{}triangle.\+h"{}}\newline
+{\ttfamily \#include "{}vector.\+h"{}}\newline
+{\ttfamily \#include $<$cstddef$>$}\newline
+{\ttfamily \#include $<$cstdio$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{mesh_8cpp_a56ac820a3fbe9d2f0fd7ba2359a2de0d}{load\+\_\+cube\+\_\+mesh\+\_\+data}} ()
+\item 
+void \mbox{\hyperlink{mesh_8cpp_a71fd0fdab3340858915834be68350270}{load\+\_\+obj\+\_\+file\+\_\+data}} (std\+::string filename)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structmesh__t}{mesh\+\_\+t}} \mbox{\hyperlink{mesh_8cpp_a68edbdf086476ca035ead74352015d39}{mesh}}
+\item 
+\mbox{\hyperlink{structvec3__t}{vec3\+\_\+t}} \mbox{\hyperlink{mesh_8cpp_ae406353c761eaa37a319af2683140b6a}{cube\+\_\+vertices}} \mbox{[}\mbox{\hyperlink{mesh_8h_a21bc75d3655fab24cc04ff34f182f2a0}{N\+\_\+\+CUBE\+\_\+\+VERTICES}}\mbox{]}
+\item 
+\mbox{\hyperlink{structface__t}{face\+\_\+t}} \mbox{\hyperlink{mesh_8cpp_a21529ff57198dbffc8f5a35f04cfc3c5}{cube\+\_\+faces}} \mbox{[}\mbox{\hyperlink{mesh_8h_a800ba56257507b49c03531a93f4c2deb}{N\+\_\+\+CUBE\+\_\+\+FACES}}\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{mesh_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{mesh_8cpp_a56ac820a3fbe9d2f0fd7ba2359a2de0d}\index{mesh.cpp@{mesh.cpp}!load\_cube\_mesh\_data@{load\_cube\_mesh\_data}}
+\index{load\_cube\_mesh\_data@{load\_cube\_mesh\_data}!mesh.cpp@{mesh.cpp}}
+\doxysubsubsection{\texorpdfstring{load\_cube\_mesh\_data()}{load\_cube\_mesh\_data()}}
+{\footnotesize\ttfamily \label{mesh_8cpp_a56ac820a3fbe9d2f0fd7ba2359a2de0d} 
+void load\+\_\+cube\+\_\+mesh\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{mesh_8cpp_a71fd0fdab3340858915834be68350270}\index{mesh.cpp@{mesh.cpp}!load\_obj\_file\_data@{load\_obj\_file\_data}}
+\index{load\_obj\_file\_data@{load\_obj\_file\_data}!mesh.cpp@{mesh.cpp}}
+\doxysubsubsection{\texorpdfstring{load\_obj\_file\_data()}{load\_obj\_file\_data()}}
+{\footnotesize\ttfamily \label{mesh_8cpp_a71fd0fdab3340858915834be68350270} 
+void load\+\_\+obj\+\_\+file\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::string}]{filename}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-var-members}
+\Hypertarget{mesh_8cpp_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{mesh_8cpp_a21529ff57198dbffc8f5a35f04cfc3c5}\index{mesh.cpp@{mesh.cpp}!cube\_faces@{cube\_faces}}
+\index{cube\_faces@{cube\_faces}!mesh.cpp@{mesh.cpp}}
+\doxysubsubsection{\texorpdfstring{cube\_faces}{cube\_faces}}
+{\footnotesize\ttfamily \label{mesh_8cpp_a21529ff57198dbffc8f5a35f04cfc3c5} 
+\mbox{\hyperlink{structface__t}{face\+\_\+t}} cube\+\_\+faces\mbox{[}\mbox{\hyperlink{mesh_8h_a800ba56257507b49c03531a93f4c2deb}{N\+\_\+\+CUBE\+\_\+\+FACES}}\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \{.a\ =\ 1,\ .b\ =\ 2,\ .c\ =\ 3,\ .color\ =\ 0xFFFF0000\ \},}
+\DoxyCodeLine{\ \ \ \ \{.a\ =\ 1,\ .b\ =\ 3,\ .c\ =\ 4,\ .color\ =\ 0xFFFF0000\ \},}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \{.a\ =\ 4,\ .b\ =\ 3,\ .c\ =\ 5,\ .color\ =\ 0xFF00FF00\ \},}
+\DoxyCodeLine{\ \ \ \ \{.a\ =\ 4,\ .b\ =\ 5,\ .c\ =\ 6,\ .color\ =\ 0xFF00FF00\ \},}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \{.a\ =\ 6,\ .b\ =\ 5,\ .c\ =\ 7,\ .color\ =\ 0xFF0000FF\ \},}
+\DoxyCodeLine{\ \ \ \ \{.a\ =\ 6,\ .b\ =\ 7,\ .c\ =\ 8,\ .color\ =\ 0xFF0000FF\ \},}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \{.a\ =\ 8,\ .b\ =\ 7,\ .c\ =\ 2,\ .color\ =\ 0xFFFFFF00\ \},}
+\DoxyCodeLine{\ \ \ \ \{.a\ =\ 8,\ .b\ =\ 2,\ .c\ =\ 1,\ .color\ =\ 0xFFFFFF00\ \},}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \{.a\ =\ 2,\ .b\ =\ 7,\ .c\ =\ 5,\ .color\ =\ 0xFFFF00FF\ \},}
+\DoxyCodeLine{\ \ \ \ \{.a\ =\ 2,\ .b\ =\ 5,\ .c\ =\ 3,\ .color\ =\ 0xFFFF00FF\ \},}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \{.a\ =\ 6,\ .b\ =\ 8,\ .c\ =\ 1,\ .color\ =\ 0xFF00FFFF\ \},}
+\DoxyCodeLine{\ \ \ \ \{.a\ =\ 6,\ .b\ =\ 1,\ .c\ =\ 4,\ .color\ =\ 0xFF00FFFF\ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{mesh_8cpp_ae406353c761eaa37a319af2683140b6a}\index{mesh.cpp@{mesh.cpp}!cube\_vertices@{cube\_vertices}}
+\index{cube\_vertices@{cube\_vertices}!mesh.cpp@{mesh.cpp}}
+\doxysubsubsection{\texorpdfstring{cube\_vertices}{cube\_vertices}}
+{\footnotesize\ttfamily \label{mesh_8cpp_ae406353c761eaa37a319af2683140b6a} 
+\mbox{\hyperlink{structvec3__t}{vec3\+\_\+t}} cube\+\_\+vertices\mbox{[}\mbox{\hyperlink{mesh_8h_a21bc75d3655fab24cc04ff34f182f2a0}{N\+\_\+\+CUBE\+\_\+\+VERTICES}}\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ \{.x\ =\ -\/1,\ .y\ =\ -\/1,\ .z\ =\ -\/1\},\ }
+\DoxyCodeLine{\ \ \ \ \{.x\ =\ -\/1,\ .y\ =\ \ 1,\ .z\ =\ -\/1\},\ \ }
+\DoxyCodeLine{\ \ \ \ \{.x\ =\ \ 1,\ .y\ =\ \ 1,\ .z\ =\ -\/1\},\ \ \ }
+\DoxyCodeLine{\ \ \ \ \{.x\ =\ \ 1,\ .y\ =\ -\/1,\ .z\ =\ -\/1\},\ \ }
+\DoxyCodeLine{\ \ \ \ \{.x\ =\ \ 1,\ .y\ =\ \ 1,\ .z\ =\ \ 1\},\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \{.x\ =\ \ 1,\ .y\ =\ -\/1,\ .z\ =\ \ 1\},\ \ \ }
+\DoxyCodeLine{\ \ \ \ \{.x\ =\ -\/1,\ .y\ =\ \ 1,\ .z\ =\ \ 1\},\ \ \ }
+\DoxyCodeLine{\ \ \ \ \{.x\ =\ -\/1,\ .y\ =\ -\/1,\ .z\ =\ \ 1\}\ \ \ }
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{mesh_8cpp_a68edbdf086476ca035ead74352015d39}\index{mesh.cpp@{mesh.cpp}!mesh@{mesh}}
+\index{mesh@{mesh}!mesh.cpp@{mesh.cpp}}
+\doxysubsubsection{\texorpdfstring{mesh}{mesh}}
+{\footnotesize\ttfamily \label{mesh_8cpp_a68edbdf086476ca035ead74352015d39} 
+\mbox{\hyperlink{structmesh__t}{mesh\+\_\+t}} mesh}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ .vertices\ =\ NULL,}
+\DoxyCodeLine{\ \ .faces\ =\ NULL,}
+\DoxyCodeLine{\ \ .rotation\ =\ \{0,\ 0,\ 0\},}
+\DoxyCodeLine{\ \ .scale\ =\ \{\ 1.0,\ 1.0,\ 1.0\ \},}
+\DoxyCodeLine{\ \ .translation\ =\ \{0,\ 0,\ 0\}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

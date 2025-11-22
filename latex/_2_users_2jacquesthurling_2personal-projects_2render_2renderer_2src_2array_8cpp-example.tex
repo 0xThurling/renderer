@@ -1,0 +1,82 @@
+\doxysection{/\+Users/jacquesthurling/personal-\/projects/render/renderer/src/array.\+cpp}
+\hypertarget{_2_users_2jacquesthurling_2personal-projects_2render_2renderer_2src_2array_8cpp-example}{}\label{_2_users_2jacquesthurling_2personal-projects_2render_2renderer_2src_2array_8cpp-example}Calculates the compound interest based on principal, annual interest rate, number of times interest is compounded per year, and total number of years.
+
+Calculates the compound interest based on principal, annual interest rate, number of times interest is compounded per year, and total number of years.
+\begin{DoxyParams}{Parameters}
+{\em principal} & The initial amount of money invested or loaned (must be non-\/negative). \\
+\hline
+{\em annual\+Rate} & The annual interest rate expressed as a decimal (e.\+g., 0.\+05 for 5\%). \\
+\hline
+{\em times\+Compounded} & The number of times interest is compounded per year (e.\+g., 12 for monthly). \\
+\hline
+{\em years} & The total number of years the money is invested or borrowed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The final amount after interest has been compounded over the specified period.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If any of the input values are invalid (negative principal, negative rate, zero compounding, negative years).\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyRemark}{Remarks}
+Formula used\+: A = P \texorpdfstring{$\ast$}{*} (1 + r/n)\texorpdfstring{$^\wedge$}{\string^}(n \texorpdfstring{$\ast$}{*} t) Where\+: A = final amount P = principal r = annual interest rate n = times compounded per year t = number of years
+\end{DoxyRemark}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ result\ =\ \mbox{\hyperlink{array_8cpp_aedf29c0ca642efa1c794db9937d4d8a1}{calculateCompoundInterest}}(1000.0,\ 0.05,\ 12,\ 10);}
+\DoxyCodeLine{std::cout\ <<\ result\ <<\ std::endl;\ \textcolor{comment}{//\ \string~1647.01}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{array_8h}{array.h}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <cstddef>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ ARRAY\_RAW\_DATA(array)\ ((int\ *)(array)\ -\/\ 2)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ ARRAY\_CAPACITY(array)\ (ARRAY\_RAW\_DATA(array)[0])}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ ARRAY\_OCCUPIED(array)\ (ARRAY\_RAW\_DATA(array)[1])}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ *\mbox{\hyperlink{array_8cpp_a70d42b5366afe796eebebf08f04bbbba}{array\_hold}}(\textcolor{keywordtype}{void}\ *array,\ \textcolor{keywordtype}{int}\ count,\ \textcolor{keywordtype}{int}\ item\_size)\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{if}\ (array\ ==\ NULL)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ raw\_size\ =\ (\textcolor{keyword}{sizeof}(int)\ *\ 2)\ +\ (item\_size\ *\ count);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ *base\ =\ (\textcolor{keywordtype}{int}\ *)malloc(raw\_size);}
+\DoxyCodeLine{\ \ \ \ base[0]\ =\ count;}
+\DoxyCodeLine{\ \ \ \ base[1]\ =\ count;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ base\ +\ 2;}
+\DoxyCodeLine{\ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{array_8cpp_a4e271601a6e9da8eab9970c619ae5d83}{ARRAY\_OCCUPIED}}(array)\ +\ count\ <=\ \mbox{\hyperlink{array_8cpp_a4354d9488b1d4a40fca5262aff959ade}{ARRAY\_CAPACITY}}(array))\ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{array_8cpp_a4e271601a6e9da8eab9970c619ae5d83}{ARRAY\_OCCUPIED}}(array)\ +=\ count;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ array;}
+\DoxyCodeLine{\ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ needed\_size\ =\ \mbox{\hyperlink{array_8cpp_a4e271601a6e9da8eab9970c619ae5d83}{ARRAY\_OCCUPIED}}(array)\ +\ count;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ float\_curr\ =\ \mbox{\hyperlink{array_8cpp_a4354d9488b1d4a40fca5262aff959ade}{ARRAY\_CAPACITY}}(array)\ *\ 2;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ capacity\ =\ needed\_size\ >\ float\_curr\ ?\ needed\_size\ :\ float\_curr;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ occupied\ =\ needed\_size;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ raw\_size\ =\ \textcolor{keyword}{sizeof}(int)\ *\ 2\ +\ item\_size\ *\ capacity;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}*\ base\ =\ (\textcolor{keywordtype}{int}*)realloc(\mbox{\hyperlink{array_8cpp_a9daa954bbed95e6a96351238cc5dabb9}{ARRAY\_RAW\_DATA}}(array),\ raw\_size);}
+\DoxyCodeLine{\ \ \ \ base[0]\ =\ capacity;}
+\DoxyCodeLine{\ \ \ \ base[1]\ =\ occupied;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ base\ +\ 2;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ \mbox{\hyperlink{array_8cpp_aedf29c0ca642efa1c794db9937d4d8a1}{calculateCompoundInterest}}(\textcolor{keywordtype}{double}\ principal,\ \textcolor{keywordtype}{double}\ annualRate,\ \textcolor{keywordtype}{int}\ timesCompounded,\ \textcolor{keywordtype}{int}\ years)\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{return}\ 0.0;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{array_8cpp_a82b56a985c3bcc09e84fd0e087511918}{array\_length}}(\textcolor{keywordtype}{void}\ *array)\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{return}\ (array\ !=\ NULL)\ ?\ \mbox{\hyperlink{array_8cpp_a4e271601a6e9da8eab9970c619ae5d83}{ARRAY\_OCCUPIED}}(array)\ :\ 0;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{array_8cpp_ab577e9147a35a54120cc944a517b5049}{array\_free}}(\textcolor{keywordtype}{void}\ *array)\{}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{if}\ (array\ !=\ NULL)\ \{}
+\DoxyCodeLine{\ \ \ \ free(\mbox{\hyperlink{array_8cpp_a9daa954bbed95e6a96351238cc5dabb9}{ARRAY\_RAW\_DATA}}(array));}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCodeInclude}
+ 

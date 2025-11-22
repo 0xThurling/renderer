@@ -1,0 +1,93 @@
+\doxysection{src/matrix.cpp File Reference}
+\hypertarget{matrix_8cpp}{}\label{matrix_8cpp}\index{src/matrix.cpp@{src/matrix.cpp}}
+{\ttfamily \#include "{}matrix.\+h"{}}\newline
+{\ttfamily \#include "{}vector.\+h"{}}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} \mbox{\hyperlink{matrix_8cpp_aeee38696d0098db7333493e2ce2ea1b3}{mat4\+\_\+identity}} ()
+\item 
+\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} \mbox{\hyperlink{matrix_8cpp_a15f6d35c85ae1d782abe853a0c5d39ea}{mat4\+\_\+make\+\_\+scale}} (float sx, float sy, float sz)
+\item 
+\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} \mbox{\hyperlink{matrix_8cpp_a5167dbf1bcea91b6686b5ec9111dc775}{mat4\+\_\+make\+\_\+translation}} (float tx, float ty, float tz)
+\item 
+\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} \mbox{\hyperlink{matrix_8cpp_a4175bdc0ed237723ca9879f915bcff2f}{mat4\+\_\+make\+\_\+rotation\+\_\+x}} (float angle)
+\item 
+\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} \mbox{\hyperlink{matrix_8cpp_aea0112d640943bc4457c8f54083bb772}{mat4\+\_\+make\+\_\+rotation\+\_\+y}} (float angle)
+\item 
+\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} \mbox{\hyperlink{matrix_8cpp_aa460c4da84e012178ab530b61ff3a241}{mat4\+\_\+make\+\_\+rotation\+\_\+z}} (float angle)
+\item 
+\mbox{\hyperlink{structvec4__t}{vec4\+\_\+t}} \mbox{\hyperlink{matrix_8cpp_a68c4c158aefaaf6004db24edca7ec18d}{mat4\+\_\+mul\+\_\+vec4}} (\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} m, \mbox{\hyperlink{structvec4__t}{vec4\+\_\+t}} v)
+\item 
+\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} \mbox{\hyperlink{matrix_8cpp_af9a068b08b943d8f2fd3754cc6833aa6}{mat4\+\_\+mul\+\_\+mat4}} (\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} a, \mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} b)
+\item 
+\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} \mbox{\hyperlink{matrix_8cpp_a69affdf134d4dabf90c4a80865c9b9ff}{mat4\+\_\+make\+\_\+perspective}} (float fov, float aspect, float znear, float zfar)
+\item 
+\mbox{\hyperlink{structvec4__t}{vec4\+\_\+t}} \mbox{\hyperlink{matrix_8cpp_af2060d57c37e5d1d6988aed8e3bc25f3}{mat4\+\_\+mul\+\_\+vec4\+\_\+project}} (\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} mat\+\_\+proj, \mbox{\hyperlink{structvec4__t}{vec4\+\_\+t}} v)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{matrix_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{matrix_8cpp_aeee38696d0098db7333493e2ce2ea1b3}\index{matrix.cpp@{matrix.cpp}!mat4\_identity@{mat4\_identity}}
+\index{mat4\_identity@{mat4\_identity}!matrix.cpp@{matrix.cpp}}
+\doxysubsubsection{\texorpdfstring{mat4\_identity()}{mat4\_identity()}}
+{\footnotesize\ttfamily \label{matrix_8cpp_aeee38696d0098db7333493e2ce2ea1b3} 
+\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} mat4\+\_\+identity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{matrix_8cpp_a69affdf134d4dabf90c4a80865c9b9ff}\index{matrix.cpp@{matrix.cpp}!mat4\_make\_perspective@{mat4\_make\_perspective}}
+\index{mat4\_make\_perspective@{mat4\_make\_perspective}!matrix.cpp@{matrix.cpp}}
+\doxysubsubsection{\texorpdfstring{mat4\_make\_perspective()}{mat4\_make\_perspective()}}
+{\footnotesize\ttfamily \label{matrix_8cpp_a69affdf134d4dabf90c4a80865c9b9ff} 
+\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} mat4\+\_\+make\+\_\+perspective (\begin{DoxyParamCaption}\item[{float}]{fov}{, }\item[{float}]{aspect}{, }\item[{float}]{znear}{, }\item[{float}]{zfar}{}\end{DoxyParamCaption})}
+
+\Hypertarget{matrix_8cpp_a4175bdc0ed237723ca9879f915bcff2f}\index{matrix.cpp@{matrix.cpp}!mat4\_make\_rotation\_x@{mat4\_make\_rotation\_x}}
+\index{mat4\_make\_rotation\_x@{mat4\_make\_rotation\_x}!matrix.cpp@{matrix.cpp}}
+\doxysubsubsection{\texorpdfstring{mat4\_make\_rotation\_x()}{mat4\_make\_rotation\_x()}}
+{\footnotesize\ttfamily \label{matrix_8cpp_a4175bdc0ed237723ca9879f915bcff2f} 
+\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} mat4\+\_\+make\+\_\+rotation\+\_\+x (\begin{DoxyParamCaption}\item[{float}]{angle}{}\end{DoxyParamCaption})}
+
+\Hypertarget{matrix_8cpp_aea0112d640943bc4457c8f54083bb772}\index{matrix.cpp@{matrix.cpp}!mat4\_make\_rotation\_y@{mat4\_make\_rotation\_y}}
+\index{mat4\_make\_rotation\_y@{mat4\_make\_rotation\_y}!matrix.cpp@{matrix.cpp}}
+\doxysubsubsection{\texorpdfstring{mat4\_make\_rotation\_y()}{mat4\_make\_rotation\_y()}}
+{\footnotesize\ttfamily \label{matrix_8cpp_aea0112d640943bc4457c8f54083bb772} 
+\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} mat4\+\_\+make\+\_\+rotation\+\_\+y (\begin{DoxyParamCaption}\item[{float}]{angle}{}\end{DoxyParamCaption})}
+
+\Hypertarget{matrix_8cpp_aa460c4da84e012178ab530b61ff3a241}\index{matrix.cpp@{matrix.cpp}!mat4\_make\_rotation\_z@{mat4\_make\_rotation\_z}}
+\index{mat4\_make\_rotation\_z@{mat4\_make\_rotation\_z}!matrix.cpp@{matrix.cpp}}
+\doxysubsubsection{\texorpdfstring{mat4\_make\_rotation\_z()}{mat4\_make\_rotation\_z()}}
+{\footnotesize\ttfamily \label{matrix_8cpp_aa460c4da84e012178ab530b61ff3a241} 
+\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} mat4\+\_\+make\+\_\+rotation\+\_\+z (\begin{DoxyParamCaption}\item[{float}]{angle}{}\end{DoxyParamCaption})}
+
+\Hypertarget{matrix_8cpp_a15f6d35c85ae1d782abe853a0c5d39ea}\index{matrix.cpp@{matrix.cpp}!mat4\_make\_scale@{mat4\_make\_scale}}
+\index{mat4\_make\_scale@{mat4\_make\_scale}!matrix.cpp@{matrix.cpp}}
+\doxysubsubsection{\texorpdfstring{mat4\_make\_scale()}{mat4\_make\_scale()}}
+{\footnotesize\ttfamily \label{matrix_8cpp_a15f6d35c85ae1d782abe853a0c5d39ea} 
+\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} mat4\+\_\+make\+\_\+scale (\begin{DoxyParamCaption}\item[{float}]{sx}{, }\item[{float}]{sy}{, }\item[{float}]{sz}{}\end{DoxyParamCaption})}
+
+\Hypertarget{matrix_8cpp_a5167dbf1bcea91b6686b5ec9111dc775}\index{matrix.cpp@{matrix.cpp}!mat4\_make\_translation@{mat4\_make\_translation}}
+\index{mat4\_make\_translation@{mat4\_make\_translation}!matrix.cpp@{matrix.cpp}}
+\doxysubsubsection{\texorpdfstring{mat4\_make\_translation()}{mat4\_make\_translation()}}
+{\footnotesize\ttfamily \label{matrix_8cpp_a5167dbf1bcea91b6686b5ec9111dc775} 
+\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} mat4\+\_\+make\+\_\+translation (\begin{DoxyParamCaption}\item[{float}]{tx}{, }\item[{float}]{ty}{, }\item[{float}]{tz}{}\end{DoxyParamCaption})}
+
+\Hypertarget{matrix_8cpp_af9a068b08b943d8f2fd3754cc6833aa6}\index{matrix.cpp@{matrix.cpp}!mat4\_mul\_mat4@{mat4\_mul\_mat4}}
+\index{mat4\_mul\_mat4@{mat4\_mul\_mat4}!matrix.cpp@{matrix.cpp}}
+\doxysubsubsection{\texorpdfstring{mat4\_mul\_mat4()}{mat4\_mul\_mat4()}}
+{\footnotesize\ttfamily \label{matrix_8cpp_af9a068b08b943d8f2fd3754cc6833aa6} 
+\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} mat4\+\_\+mul\+\_\+mat4 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}}}]{a}{, }\item[{\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}}}]{b}{}\end{DoxyParamCaption})}
+
+\Hypertarget{matrix_8cpp_a68c4c158aefaaf6004db24edca7ec18d}\index{matrix.cpp@{matrix.cpp}!mat4\_mul\_vec4@{mat4\_mul\_vec4}}
+\index{mat4\_mul\_vec4@{mat4\_mul\_vec4}!matrix.cpp@{matrix.cpp}}
+\doxysubsubsection{\texorpdfstring{mat4\_mul\_vec4()}{mat4\_mul\_vec4()}}
+{\footnotesize\ttfamily \label{matrix_8cpp_a68c4c158aefaaf6004db24edca7ec18d} 
+\mbox{\hyperlink{structvec4__t}{vec4\+\_\+t}} mat4\+\_\+mul\+\_\+vec4 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}}}]{m}{, }\item[{\mbox{\hyperlink{structvec4__t}{vec4\+\_\+t}}}]{v}{}\end{DoxyParamCaption})}
+
+\Hypertarget{matrix_8cpp_af2060d57c37e5d1d6988aed8e3bc25f3}\index{matrix.cpp@{matrix.cpp}!mat4\_mul\_vec4\_project@{mat4\_mul\_vec4\_project}}
+\index{mat4\_mul\_vec4\_project@{mat4\_mul\_vec4\_project}!matrix.cpp@{matrix.cpp}}
+\doxysubsubsection{\texorpdfstring{mat4\_mul\_vec4\_project()}{mat4\_mul\_vec4\_project()}}
+{\footnotesize\ttfamily \label{matrix_8cpp_af2060d57c37e5d1d6988aed8e3bc25f3} 
+\mbox{\hyperlink{structvec4__t}{vec4\+\_\+t}} mat4\+\_\+mul\+\_\+vec4\+\_\+project (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}}}]{mat\+\_\+proj}{, }\item[{\mbox{\hyperlink{structvec4__t}{vec4\+\_\+t}}}]{v}{}\end{DoxyParamCaption})}
+

@@ -1,0 +1,138 @@
+\doxysection{src/main.cpp File Reference}
+\hypertarget{main_8cpp}{}\label{main_8cpp}\index{src/main.cpp@{src/main.cpp}}
+{\ttfamily \#include "{}SDL\+\_\+events.\+h"{}}\newline
+{\ttfamily \#include "{}SDL\+\_\+keycode.\+h"{}}\newline
+{\ttfamily \#include "{}SDL\+\_\+pixels.\+h"{}}\newline
+{\ttfamily \#include "{}SDL\+\_\+render.\+h"{}}\newline
+{\ttfamily \#include "{}SDL\+\_\+timer.\+h"{}}\newline
+{\ttfamily \#include "{}array.\+h"{}}\newline
+{\ttfamily \#include "{}display.\+h"{}}\newline
+{\ttfamily \#include "{}matrix.\+h"{}}\newline
+{\ttfamily \#include "{}mesh.\+h"{}}\newline
+{\ttfamily \#include "{}triangle.\+h"{}}\newline
+{\ttfamily \#include "{}vector.\+h"{}}\newline
+{\ttfamily \#include $<$cstddef$>$}\newline
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$ostream$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_ac13e6755c3a45075b93a372894088042}{process\+\_\+input}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_ac5c54df7ed3b930268c8d7752c101725}{update}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_a7d9edd8b0a8d0d2f737eb5ee0b0a5040}{render}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_ad92db8ac5dbcb1f4c8f57c5b3ea87473}{free\+\_\+resources}} ()
+\item 
+int \mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structtriangle__t}{triangle\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8cpp_a8be0d45f387bc8be059b330be34f1712}{triangles\+\_\+to\+\_\+render}} = NULL
+\item 
+\mbox{\hyperlink{display_8h_a900afd557ddd2e0a17dbf8239235e6fe}{Render\+\_\+\+Method}} \mbox{\hyperlink{main_8cpp_a1533d3561ca5643916fc8e8206b02f16}{render\+\_\+method}} = \mbox{\hyperlink{display_8h_a900afd557ddd2e0a17dbf8239235e6fea363ff0b13ca1fef580c71ab4aab7b6ac}{RENDER\+\_\+\+WIRE}}
+\item 
+\mbox{\hyperlink{display_8h_a5270db69461d114f5b38b00c5a171dfb}{Cull\+\_\+\+Method}} \mbox{\hyperlink{main_8cpp_a1b41373e8b16cdae77d752b305376b37}{cull\+\_\+method}} = \mbox{\hyperlink{display_8h_a5270db69461d114f5b38b00c5a171dfbac319cb28cad314b933e16958dd5b2ad6}{CULL\+\_\+\+BACKFACE}}
+\item 
+bool \mbox{\hyperlink{main_8cpp_a95cbd6b99430748422cc048b4f29dc52}{is\+\_\+running}} = false
+\item 
+int \mbox{\hyperlink{main_8cpp_ae98922f1709b6c24e2c10f3f2f0f9ec8}{previous\+\_\+frame\+\_\+time}} = 0
+\item 
+\mbox{\hyperlink{structvec3__t}{vec3\+\_\+t}} \mbox{\hyperlink{main_8cpp_aee80ed6bdf93e023390ab5b3d7526cb0}{camera\+\_\+position}} = \{.x = 0, .y = 0, .z = 0\}
+\item 
+\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} \mbox{\hyperlink{main_8cpp_ada57a80574c770ec34ddeb36a5af4734}{proj\+\_\+matrix}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{main_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8cpp_ad92db8ac5dbcb1f4c8f57c5b3ea87473}\index{main.cpp@{main.cpp}!free\_resources@{free\_resources}}
+\index{free\_resources@{free\_resources}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{free\_resources()}{free\_resources()}}
+{\footnotesize\ttfamily \label{main_8cpp_ad92db8ac5dbcb1f4c8f57c5b3ea87473} 
+void free\+\_\+resources (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+int main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_ac13e6755c3a45075b93a372894088042}\index{main.cpp@{main.cpp}!process\_input@{process\_input}}
+\index{process\_input@{process\_input}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{process\_input()}{process\_input()}}
+{\footnotesize\ttfamily \label{main_8cpp_ac13e6755c3a45075b93a372894088042} 
+void process\+\_\+input (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_a7d9edd8b0a8d0d2f737eb5ee0b0a5040}\index{main.cpp@{main.cpp}!render@{render}}
+\index{render@{render}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily \label{main_8cpp_a7d9edd8b0a8d0d2f737eb5ee0b0a5040} 
+void render (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}\index{main.cpp@{main.cpp}!setup@{setup}}
+\index{setup@{setup}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \label{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d} 
+void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_ac5c54df7ed3b930268c8d7752c101725}\index{main.cpp@{main.cpp}!update@{update}}
+\index{update@{update}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{main_8cpp_ac5c54df7ed3b930268c8d7752c101725} 
+void update (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-var-members}
+\Hypertarget{main_8cpp_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{main_8cpp_aee80ed6bdf93e023390ab5b3d7526cb0}\index{main.cpp@{main.cpp}!camera\_position@{camera\_position}}
+\index{camera\_position@{camera\_position}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{camera\_position}{camera\_position}}
+{\footnotesize\ttfamily \label{main_8cpp_aee80ed6bdf93e023390ab5b3d7526cb0} 
+\mbox{\hyperlink{structvec3__t}{vec3\+\_\+t}} camera\+\_\+position = \{.x = 0, .y = 0, .z = 0\}}
+
+\Hypertarget{main_8cpp_a1b41373e8b16cdae77d752b305376b37}\index{main.cpp@{main.cpp}!cull\_method@{cull\_method}}
+\index{cull\_method@{cull\_method}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{cull\_method}{cull\_method}}
+{\footnotesize\ttfamily \label{main_8cpp_a1b41373e8b16cdae77d752b305376b37} 
+\mbox{\hyperlink{display_8h_a5270db69461d114f5b38b00c5a171dfb}{Cull\+\_\+\+Method}} cull\+\_\+method = \mbox{\hyperlink{display_8h_a5270db69461d114f5b38b00c5a171dfbac319cb28cad314b933e16958dd5b2ad6}{CULL\+\_\+\+BACKFACE}}}
+
+\Hypertarget{main_8cpp_a95cbd6b99430748422cc048b4f29dc52}\index{main.cpp@{main.cpp}!is\_running@{is\_running}}
+\index{is\_running@{is\_running}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{is\_running}{is\_running}}
+{\footnotesize\ttfamily \label{main_8cpp_a95cbd6b99430748422cc048b4f29dc52} 
+bool is\+\_\+running = false}
+
+\Hypertarget{main_8cpp_ae98922f1709b6c24e2c10f3f2f0f9ec8}\index{main.cpp@{main.cpp}!previous\_frame\_time@{previous\_frame\_time}}
+\index{previous\_frame\_time@{previous\_frame\_time}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{previous\_frame\_time}{previous\_frame\_time}}
+{\footnotesize\ttfamily \label{main_8cpp_ae98922f1709b6c24e2c10f3f2f0f9ec8} 
+int previous\+\_\+frame\+\_\+time = 0}
+
+\Hypertarget{main_8cpp_ada57a80574c770ec34ddeb36a5af4734}\index{main.cpp@{main.cpp}!proj\_matrix@{proj\_matrix}}
+\index{proj\_matrix@{proj\_matrix}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{proj\_matrix}{proj\_matrix}}
+{\footnotesize\ttfamily \label{main_8cpp_ada57a80574c770ec34ddeb36a5af4734} 
+\mbox{\hyperlink{structmat4__t}{mat4\+\_\+t}} proj\+\_\+matrix}
+
+\Hypertarget{main_8cpp_a1533d3561ca5643916fc8e8206b02f16}\index{main.cpp@{main.cpp}!render\_method@{render\_method}}
+\index{render\_method@{render\_method}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{render\_method}{render\_method}}
+{\footnotesize\ttfamily \label{main_8cpp_a1533d3561ca5643916fc8e8206b02f16} 
+\mbox{\hyperlink{display_8h_a900afd557ddd2e0a17dbf8239235e6fe}{Render\+\_\+\+Method}} render\+\_\+method = \mbox{\hyperlink{display_8h_a900afd557ddd2e0a17dbf8239235e6fea363ff0b13ca1fef580c71ab4aab7b6ac}{RENDER\+\_\+\+WIRE}}}
+
+\Hypertarget{main_8cpp_a8be0d45f387bc8be059b330be34f1712}\index{main.cpp@{main.cpp}!triangles\_to\_render@{triangles\_to\_render}}
+\index{triangles\_to\_render@{triangles\_to\_render}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{triangles\_to\_render}{triangles\_to\_render}}
+{\footnotesize\ttfamily \label{main_8cpp_a8be0d45f387bc8be059b330be34f1712} 
+\mbox{\hyperlink{structtriangle__t}{triangle\+\_\+t}}\texorpdfstring{$\ast$}{*} triangles\+\_\+to\+\_\+render = NULL}
+

@@ -4,4 +4,8 @@ build
 /build
 build/*
 
+html
+/html
+html/*
+
 .DS_Store

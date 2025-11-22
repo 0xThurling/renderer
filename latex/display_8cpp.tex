@@ -1,0 +1,147 @@
+\doxysection{src/display.cpp File Reference}
+\hypertarget{display_8cpp}{}\label{display_8cpp}\index{src/display.cpp@{src/display.cpp}}
+{\ttfamily \#include "{}display.\+h"{}}\newline
+{\ttfamily \#include "{}SDL\+\_\+render.\+h"{}}\newline
+{\ttfamily \#include "{}SDL\+\_\+video.\+h"{}}\newline
+{\ttfamily \#include $<$SDL.\+h$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$cstddef$>$}\newline
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$cstdio$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{display_8cpp_a6b9679e55e9ad8af9f546d0e999d9c2b}{initialize\+\_\+window}} ()
+\item 
+void \mbox{\hyperlink{display_8cpp_af1f57fdfd85ff30e66bbe69f6d43aa04}{draw\+\_\+grid}} ()
+\item 
+void \mbox{\hyperlink{display_8cpp_a9c082403c1d37dfe836430998e7dee98}{draw\+\_\+pixel}} (int x, int y, uint32\+\_\+t color)
+\item 
+void \mbox{\hyperlink{display_8cpp_aaedea201124b196cce11a9eb0530ccbf}{draw\+\_\+line}} (int x0, int y0, int x1, int y1, uint32\+\_\+t color)
+\item 
+void \mbox{\hyperlink{display_8cpp_abe2241bf7ff022525ea30714c2772e37}{draw\+\_\+triangle}} (int x0, int y0, int x1, int y1, int x2, int y2, uint32\+\_\+t color)
+\item 
+void \mbox{\hyperlink{display_8cpp_a870a20124349c7908b445a615f96823f}{draw\+\_\+rect}} (int x, int y, int width, int height, uint32\+\_\+t color)
+\item 
+void \mbox{\hyperlink{display_8cpp_a778f9b791b0390ec7a14306b17bcec31}{render\+\_\+color\+\_\+buffer}} ()
+\item 
+void \mbox{\hyperlink{display_8cpp_a8851e0545901c1a150f48cc5a3785a1f}{clear\+\_\+color\+\_\+buffer}} (uint32\+\_\+t color)
+\item 
+void \mbox{\hyperlink{display_8cpp_a516ba65090acee0f939477ec3e6e80ea}{destroy\+\_\+window}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+SDL\+\_\+\+Window \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{display_8cpp_aaa8e409e04dcf575ef63fd5fb3db06f9}{window}} = NULL
+\item 
+SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{display_8cpp_a966da7a60c4ea3ba301e26ccc5efe452}{renderer}} = NULL
+\item 
+uint32\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{display_8cpp_aa241e4160892bba86649ddb2d153fc4d}{color\+\_\+buffer}} = NULL
+\item 
+SDL\+\_\+\+Texture \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{display_8cpp_a1c157ef9fed953a4ef91673e532a7b3a}{color\+\_\+buffer\+\_\+texture}} = NULL
+\item 
+int \mbox{\hyperlink{display_8cpp_a0e2e740afd510cfe652a1836ffbad209}{window\+\_\+width}} = 1280
+\item 
+int \mbox{\hyperlink{display_8cpp_aca33f926b061680d857699a22f676418}{window\+\_\+height}} = 720
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{display_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{display_8cpp_a8851e0545901c1a150f48cc5a3785a1f}\index{display.cpp@{display.cpp}!clear\_color\_buffer@{clear\_color\_buffer}}
+\index{clear\_color\_buffer@{clear\_color\_buffer}!display.cpp@{display.cpp}}
+\doxysubsubsection{\texorpdfstring{clear\_color\_buffer()}{clear\_color\_buffer()}}
+{\footnotesize\ttfamily \label{display_8cpp_a8851e0545901c1a150f48cc5a3785a1f} 
+void clear\+\_\+color\+\_\+buffer (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{color}{}\end{DoxyParamCaption})}
+
+\Hypertarget{display_8cpp_a516ba65090acee0f939477ec3e6e80ea}\index{display.cpp@{display.cpp}!destroy\_window@{destroy\_window}}
+\index{destroy\_window@{destroy\_window}!display.cpp@{display.cpp}}
+\doxysubsubsection{\texorpdfstring{destroy\_window()}{destroy\_window()}}
+{\footnotesize\ttfamily \label{display_8cpp_a516ba65090acee0f939477ec3e6e80ea} 
+void destroy\+\_\+window (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{display_8cpp_af1f57fdfd85ff30e66bbe69f6d43aa04}\index{display.cpp@{display.cpp}!draw\_grid@{draw\_grid}}
+\index{draw\_grid@{draw\_grid}!display.cpp@{display.cpp}}
+\doxysubsubsection{\texorpdfstring{draw\_grid()}{draw\_grid()}}
+{\footnotesize\ttfamily \label{display_8cpp_af1f57fdfd85ff30e66bbe69f6d43aa04} 
+void draw\+\_\+grid (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{display_8cpp_aaedea201124b196cce11a9eb0530ccbf}\index{display.cpp@{display.cpp}!draw\_line@{draw\_line}}
+\index{draw\_line@{draw\_line}!display.cpp@{display.cpp}}
+\doxysubsubsection{\texorpdfstring{draw\_line()}{draw\_line()}}
+{\footnotesize\ttfamily \label{display_8cpp_aaedea201124b196cce11a9eb0530ccbf} 
+void draw\+\_\+line (\begin{DoxyParamCaption}\item[{int}]{x0}{, }\item[{int}]{y0}{, }\item[{int}]{x1}{, }\item[{int}]{y1}{, }\item[{uint32\+\_\+t}]{color}{}\end{DoxyParamCaption})}
+
+\Hypertarget{display_8cpp_a9c082403c1d37dfe836430998e7dee98}\index{display.cpp@{display.cpp}!draw\_pixel@{draw\_pixel}}
+\index{draw\_pixel@{draw\_pixel}!display.cpp@{display.cpp}}
+\doxysubsubsection{\texorpdfstring{draw\_pixel()}{draw\_pixel()}}
+{\footnotesize\ttfamily \label{display_8cpp_a9c082403c1d37dfe836430998e7dee98} 
+void draw\+\_\+pixel (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{, }\item[{uint32\+\_\+t}]{color}{}\end{DoxyParamCaption})}
+
+\Hypertarget{display_8cpp_a870a20124349c7908b445a615f96823f}\index{display.cpp@{display.cpp}!draw\_rect@{draw\_rect}}
+\index{draw\_rect@{draw\_rect}!display.cpp@{display.cpp}}
+\doxysubsubsection{\texorpdfstring{draw\_rect()}{draw\_rect()}}
+{\footnotesize\ttfamily \label{display_8cpp_a870a20124349c7908b445a615f96823f} 
+void draw\+\_\+rect (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{, }\item[{int}]{width}{, }\item[{int}]{height}{, }\item[{uint32\+\_\+t}]{color}{}\end{DoxyParamCaption})}
+
+\Hypertarget{display_8cpp_abe2241bf7ff022525ea30714c2772e37}\index{display.cpp@{display.cpp}!draw\_triangle@{draw\_triangle}}
+\index{draw\_triangle@{draw\_triangle}!display.cpp@{display.cpp}}
+\doxysubsubsection{\texorpdfstring{draw\_triangle()}{draw\_triangle()}}
+{\footnotesize\ttfamily \label{display_8cpp_abe2241bf7ff022525ea30714c2772e37} 
+void draw\+\_\+triangle (\begin{DoxyParamCaption}\item[{int}]{x0}{, }\item[{int}]{y0}{, }\item[{int}]{x1}{, }\item[{int}]{y1}{, }\item[{int}]{x2}{, }\item[{int}]{y2}{, }\item[{uint32\+\_\+t}]{color}{}\end{DoxyParamCaption})}
+
+\Hypertarget{display_8cpp_a6b9679e55e9ad8af9f546d0e999d9c2b}\index{display.cpp@{display.cpp}!initialize\_window@{initialize\_window}}
+\index{initialize\_window@{initialize\_window}!display.cpp@{display.cpp}}
+\doxysubsubsection{\texorpdfstring{initialize\_window()}{initialize\_window()}}
+{\footnotesize\ttfamily \label{display_8cpp_a6b9679e55e9ad8af9f546d0e999d9c2b} 
+bool initialize\+\_\+window (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{display_8cpp_a778f9b791b0390ec7a14306b17bcec31}\index{display.cpp@{display.cpp}!render\_color\_buffer@{render\_color\_buffer}}
+\index{render\_color\_buffer@{render\_color\_buffer}!display.cpp@{display.cpp}}
+\doxysubsubsection{\texorpdfstring{render\_color\_buffer()}{render\_color\_buffer()}}
+{\footnotesize\ttfamily \label{display_8cpp_a778f9b791b0390ec7a14306b17bcec31} 
+void render\+\_\+color\+\_\+buffer (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-var-members}
+\Hypertarget{display_8cpp_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{display_8cpp_aa241e4160892bba86649ddb2d153fc4d}\index{display.cpp@{display.cpp}!color\_buffer@{color\_buffer}}
+\index{color\_buffer@{color\_buffer}!display.cpp@{display.cpp}}
+\doxysubsubsection{\texorpdfstring{color\_buffer}{color\_buffer}}
+{\footnotesize\ttfamily \label{display_8cpp_aa241e4160892bba86649ddb2d153fc4d} 
+uint32\+\_\+t\texorpdfstring{$\ast$}{*} color\+\_\+buffer = NULL}
+
+\Hypertarget{display_8cpp_a1c157ef9fed953a4ef91673e532a7b3a}\index{display.cpp@{display.cpp}!color\_buffer\_texture@{color\_buffer\_texture}}
+\index{color\_buffer\_texture@{color\_buffer\_texture}!display.cpp@{display.cpp}}
+\doxysubsubsection{\texorpdfstring{color\_buffer\_texture}{color\_buffer\_texture}}
+{\footnotesize\ttfamily \label{display_8cpp_a1c157ef9fed953a4ef91673e532a7b3a} 
+SDL\+\_\+\+Texture\texorpdfstring{$\ast$}{*} color\+\_\+buffer\+\_\+texture = NULL}
+
+\Hypertarget{display_8cpp_a966da7a60c4ea3ba301e26ccc5efe452}\index{display.cpp@{display.cpp}!renderer@{renderer}}
+\index{renderer@{renderer}!display.cpp@{display.cpp}}
+\doxysubsubsection{\texorpdfstring{renderer}{renderer}}
+{\footnotesize\ttfamily \label{display_8cpp_a966da7a60c4ea3ba301e26ccc5efe452} 
+SDL\+\_\+\+Renderer\texorpdfstring{$\ast$}{*} renderer = NULL}
+
+\Hypertarget{display_8cpp_aaa8e409e04dcf575ef63fd5fb3db06f9}\index{display.cpp@{display.cpp}!window@{window}}
+\index{window@{window}!display.cpp@{display.cpp}}
+\doxysubsubsection{\texorpdfstring{window}{window}}
+{\footnotesize\ttfamily \label{display_8cpp_aaa8e409e04dcf575ef63fd5fb3db06f9} 
+SDL\+\_\+\+Window\texorpdfstring{$\ast$}{*} window = NULL}
+
+\Hypertarget{display_8cpp_aca33f926b061680d857699a22f676418}\index{display.cpp@{display.cpp}!window\_height@{window\_height}}
+\index{window\_height@{window\_height}!display.cpp@{display.cpp}}
+\doxysubsubsection{\texorpdfstring{window\_height}{window\_height}}
+{\footnotesize\ttfamily \label{display_8cpp_aca33f926b061680d857699a22f676418} 
+int window\+\_\+height = 720}
+
+\Hypertarget{display_8cpp_a0e2e740afd510cfe652a1836ffbad209}\index{display.cpp@{display.cpp}!window\_width@{window\_width}}
+\index{window\_width@{window\_width}!display.cpp@{display.cpp}}
+\doxysubsubsection{\texorpdfstring{window\_width}{window\_width}}
+{\footnotesize\ttfamily \label{display_8cpp_a0e2e740afd510cfe652a1836ffbad209} 
+int window\+\_\+width = 1280}
+

@@ -7,7 +7,7 @@
 #include <cstdint>
 #include <SDL.h>
 
-#define FPS 60
+#define FPS 5000
 #define FRAME_TARGET_TIME (1000/FPS)
 
 
