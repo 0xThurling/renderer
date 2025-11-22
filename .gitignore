@@ -8,4 +8,8 @@ html
 /html
 html/*
 
+latex
+/latex
+latex/*
+
 .DS_Store
